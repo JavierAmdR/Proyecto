@@ -24,6 +24,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 7735213f170b3814da1a9beee93c9b8a,
     type: 3}
   m_ShaderKeywords: MAIN_LIGHT_CALCULATE_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+    ADDITIONAL_LIGHT_CALCULATE_SHADOWS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

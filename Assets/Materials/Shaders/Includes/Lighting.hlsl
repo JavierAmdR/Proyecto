@@ -1,4 +1,4 @@
-//    Copyright (C) 2020 Timothy Ned Atton
+//    Copyright (C) 2020 NedMakesGames
 
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -37,59 +37,38 @@ void CalculateMainLight_float(float3 WorldPos, out float3 Direction, out float3 
 #endif
 }
 
+float GetLightIntensity(float3 color) {
+    return max(color.r, max(color.g, color.b));
+}
+
 void AddAdditionalLights_float(float Smoothness, float3 WorldPosition, float3 WorldNormal, float3 WorldView,
     float MainDiffuse, float MainSpecular, float3 MainColor,
     out float Diffuse, out float Specular, out float3 Color) {
-    Diffuse = MainDiffuse;
-    Specular = MainSpecular;
-    Color = MainColor * (MainDiffuse + MainSpecular);
+
+    float mainIntensity = GetLightIntensity(MainColor);
+    Diffuse = MainDiffuse * mainIntensity;
+    Specular = MainSpecular * mainIntensity;
+    Color = MainColor;
 
 #ifndef SHADERGRAPH_PREVIEW
+    float highestDiffuse = Diffuse;
+
     int pixelLightCount = GetAdditionalLightsCount();
     for (int i = 0; i < pixelLightCount; ++i) {
         Light light = GetAdditionalLight(i, WorldPosition);
         half NdotL = saturate(dot(WorldNormal, light.direction));
-        half atten = light.distanceAttenuation * light.shadowAttenuation;
+        half atten = light.distanceAttenuation * light.shadowAttenuation * GetLightIntensity(light.color);
         half thisDiffuse = atten * NdotL;
         half thisSpecular = LightingSpecular(thisDiffuse, light.direction, WorldNormal, WorldView, 1, Smoothness);
         Diffuse += thisDiffuse;
         Specular += thisSpecular;
-        Color += light.color * (thisDiffuse + thisSpecular);
+
+        if (thisDiffuse > highestDiffuse) {
+            highestDiffuse = thisDiffuse;
+            Color = light.color;
+        }
     }
 #endif
-
-    half total = Diffuse + Specular;
-    // If no light touches this pixel, set the color to the main light's color
-    Color = total <= 0 ? MainColor : Color / total;
 }
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

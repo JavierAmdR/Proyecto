@@ -11,6 +11,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 7735213f170b3814da1a9beee93c9b8a,
     type: 3}
   m_ShaderKeywords: MAIN_LIGHT_CALCULATE_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+    ADDITIONAL_LIGHT_CALCULATE_SHADOWS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -57,6 +58,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_12323A0D: 0
+    - Vector1_18DE3A2: 1
     - Vector1_4AD5111F: 0.69
     - Vector1_4ECFD8CB: 0.84
     - Vector1_6E4FAB37: 0.89
