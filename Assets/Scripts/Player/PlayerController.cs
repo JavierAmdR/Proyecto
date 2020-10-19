@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     //Move input
     void OnMove(InputValue value) 
     {
+        Debug.Log(value);
         Debug.Log("Move");
         moveSide = value.Get<Vector2>().x;
         moveFront = value.Get<Vector2>().y;
@@ -74,12 +75,13 @@ public class PlayerController : MonoBehaviour
     {
         movementVector = new Vector3(moveSide, 0, moveFront);
         characterController.Move(movementVector * Time.deltaTime * speed);
-        newRotation = Quaternion.Euler(0, Vector3.Angle(new Vector3(0, 0, 1), movementVector),0);
-        if (movementVector.y < 0) 
+
+        if (movementVector != Vector3.zero)
         {
-            
+            newRotation = Quaternion.LookRotation(movementVector);
         }
         playerModel.transform.rotation = newRotation;
+        
     }
 
     //Attack function
