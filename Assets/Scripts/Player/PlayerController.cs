@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -8,12 +9,21 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 movementVector;
 
+    //public BasicUpgrade test;
+
+    public int attack;
+    public int health;
+    public int defense;
+    public float speed;
+    public float attackSpeed;
+    public int stamina;
+
     private float moveSide;
     private float moveFront;
     private Quaternion newRotation;
 
-    [SerializeField] private float attackRange = 0.5f;
-    [SerializeField] private float speed;
+    public float attackRange = 0.5f;
+    
 
     private bool attacking = false;
     
@@ -75,6 +85,10 @@ public class PlayerController : MonoBehaviour
     //Attack function
     void Attack() 
     {
+        //test.SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);
+
+        //Debug.Log(attack);
+
         //HACER QUE LA FUNCIÓN ACTIVE LA ANIMACIÓN Y DESPUES QUE ESTA LLAME A OTRA FUNCIÓN DE ATAQUE
         //CAMBIAR
         Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
