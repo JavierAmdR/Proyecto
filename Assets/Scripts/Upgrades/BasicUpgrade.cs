@@ -13,10 +13,20 @@ public class BasicUpgrade : MonoBehaviour
     public int defense;
     public float speed;    
     public int stamina;
-    
+
+    private SphereCollider influenceRange;
+    private GameObject model;
+
+    private void Awake()
+    {
+        influenceRange = GetComponent<SphereCollider>();
+        model = transform.GetChild(0).gameObject;
+    }
 
     public void SetUpgrade(ref int playerAttack, ref float playerRangeAttack, ref float playerAttackSpeed, ref int playerHealth, ref int playerDefense, ref float playerSpeed, ref int playerStamina) 
     {
+        model.SetActive(false);
+        influenceRange.enabled = false;
         playerAttack += attack;
         playerRangeAttack += attackRange;
         playerAttackSpeed += attackSpeed;
@@ -24,6 +34,8 @@ public class BasicUpgrade : MonoBehaviour
         playerDefense += defense;
         playerSpeed += speed;
         playerStamina += stamina;
+
+        transform.SetParent(PlayerController.current.basicUpgrades.transform);
 
         Debug.Log("Applied" + upgradeName);
     }

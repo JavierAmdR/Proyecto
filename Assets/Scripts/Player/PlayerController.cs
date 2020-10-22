@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     //public BasicUpgrade test;
 
+    //Añadir regeneración de stamina y critico
     public int attack;
     public int health;
     public int defense;
@@ -29,7 +30,9 @@ public class PlayerController : MonoBehaviour
     
 
     private bool attacking = false;
-    
+    private bool interacting = false;
+
+    public GameObject basicUpgrades;
     private CharacterController characterController;
     [SerializeField] private Transform attackObject;
 
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         current = this;
+        basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
     }
 
     //Event Actions
@@ -78,12 +82,14 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {        
+    {  
+       
        Move();
        if (attacking == true) 
        {
             Attack();
        }
+       
     }
     
 
@@ -103,6 +109,12 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Attack");
         attacking = true;
+    }
+
+    void OnInteract() 
+    {
+        Debug.Log("Interact");
+        interacting = true;
     }
 
     //FUNCTIONS
@@ -142,6 +154,14 @@ public class PlayerController : MonoBehaviour
         attacking = false;
         //CAMBIAR
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Upgrade" && interacting == true)
+        {
+            other.gameObject.GetComponent<BasicUpgrade>().SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);         
+        }
+    }    
 
     //EDITOR
 
