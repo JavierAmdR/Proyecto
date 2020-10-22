@@ -26,7 +26,6 @@ public class BasicUpgrade : MonoBehaviour
         playerStamina += stamina;
 
         Debug.Log("Applied" + upgradeName);
-
     }
 
 }

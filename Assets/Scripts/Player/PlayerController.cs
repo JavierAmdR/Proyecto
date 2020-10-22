@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static PlayerController current;
 
     private Vector3 movementVector;
 
@@ -34,6 +37,40 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer;
 
+    private void Awake()
+    {
+        current = this;
+    }
+
+    //Event Actions
+
+    public event Action onPlayerAttack;
+    public void PlayerAttack() 
+    {
+        if (onPlayerAttack != null) 
+        {
+            onPlayerAttack();
+        }
+    }
+
+    public event Action onPlayerDamaged;
+    public void PlayerDamaged()
+    {
+        if (onPlayerDamaged != null)
+        {
+            onPlayerDamaged();
+        }
+    }
+
+    public event Action onPlayerMove;
+    public void PlayerMoving()
+    {
+        if (onPlayerMove != null)
+        {
+            onPlayerMove();
+        }
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -44,9 +81,9 @@ public class PlayerController : MonoBehaviour
     {        
        Move();
        if (attacking == true) 
-        {
+       {
             Attack();
-        }
+       }
     }
     
 
@@ -74,7 +111,9 @@ public class PlayerController : MonoBehaviour
     void Move() 
     {
         movementVector = new Vector3(moveSide, 0, moveFront);
-        characterController.Move(movementVector * Time.deltaTime * speed);
+        characterController.SimpleMove(movementVector * Time.deltaTime * speed);
+
+        current.PlayerMoving();
 
         if (movementVector != Vector3.zero)
         {
@@ -93,6 +132,8 @@ public class PlayerController : MonoBehaviour
 
         //HACER QUE LA FUNCIÓN ACTIVE LA ANIMACIÓN Y DESPUES QUE ESTA LLAME A OTRA FUNCIÓN DE ATAQUE
         //CAMBIAR
+        current.PlayerAttack();
+
         Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
         foreach (Collider enemy in hitEnemies) 
         {
