@@ -16,9 +16,7 @@ ScriptedImporter:
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Brick_Mat_V1_1\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3822918401\" type=\"8\" value=\"9,9\" />\n
-      </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://Brick_Mat_V1_1\" label=\"\" >\n </sbspreset>\n"
     shaderName: Universal Render Pipeline/Lit
     materialProperties:
       shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
@@ -26,7 +24,7 @@ ScriptedImporter:
       lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
-      customRenderQueue: 2050
+      customRenderQueue: 2000
       texEnvs:
       - name: _BaseMap
         texture: {fileID: 1260330737157214648, guid: 9074a9fb6ae11394aa77c9da1e372756,
