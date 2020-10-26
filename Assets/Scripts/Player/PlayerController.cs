@@ -84,14 +84,19 @@ public class PlayerController : MonoBehaviour
     void Update()
     {  
        
-       Move();
+       
        if (attacking == true) 
        {
             Attack();
        }
        
     }
-    
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
 
     //INPUTS
 
