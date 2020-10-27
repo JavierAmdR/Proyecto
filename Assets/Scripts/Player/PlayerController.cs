@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private bool attacking = false;
     private bool interacting = false;
+    private int frameCounter = 0;
 
     public GameObject basicUpgrades;
     private CharacterController characterController;
@@ -83,7 +84,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {  
-       
+       if (interacting == true) 
+       {
+            if (frameCounter >= 2) 
+            {
+                interacting = false;
+                frameCounter = 0;
+            }
+            else 
+            {
+                frameCounter++;
+            }
+       }
        
        if (attacking == true) 
        {
@@ -95,8 +107,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-    }
-
+    }   
 
     //INPUTS
 
