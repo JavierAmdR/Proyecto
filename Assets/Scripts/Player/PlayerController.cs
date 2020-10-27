@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     public event Action onPlayerAttack;
     public void PlayerAttack() 
-    {
+    {        
         if (onPlayerAttack != null) 
         {
             onPlayerAttack();
