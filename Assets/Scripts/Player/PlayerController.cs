@@ -21,16 +21,21 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float attackSpeed;
     public int stamina;
+    public float dashSpeed;
+    public float dashTime;
+    public float dashTimeCounter;
+
 
     private float moveSide;
     private float moveFront;
     private Quaternion newRotation;
 
     public float attackRange = 0.5f;
-    
 
+    public bool invincible = false;
     private bool attacking = false;
     private bool interacting = false;
+    bool dashing = false;
     private int frameCounter = 0;
 
     public GameObject basicUpgrades;
@@ -73,6 +78,24 @@ public class PlayerController : MonoBehaviour
         if (onPlayerMove != null)
         {
             onPlayerMove();
+        }
+    }
+
+    public event Action onGetDamage;
+    public void GetDamage()
+    {
+        if (onGetDamage != null)
+        {
+            onGetDamage();
+        }
+    }
+
+    public event Action onDie;
+    public void Die()
+    {
+        if (onDie != null)
+        {
+            onDie();
         }
     }
 
@@ -133,17 +156,47 @@ public class PlayerController : MonoBehaviour
         interacting = true;
     }
 
+    void OnDash() 
+    {
+        Debug.Log("Dash");
+        dashing = true;
+
+    }
+
     //FUNCTIONS
 
     //Move function
     void Move() 
     {
-        movementVector = new Vector3(moveSide, 0, moveFront);
-        characterController.SimpleMove(movementVector * Time.deltaTime * speed);
+        if (dashing == false && dashTimeCounter == 0) 
+        {
+            movementVector = new Vector3(moveSide, 0, moveFront);
+        }
+        if (dashing == true) 
+        {
+            OnDash();
+            characterController.SimpleMove(movementVector * dashSpeed * Time.deltaTime);
+            if (dashTimeCounter < dashTime) 
+            {
+                dashTimeCounter += 1 * Time.deltaTime;
+            }
+            else 
+            {
+                dashing = false;
+                dashTimeCounter = 0f;
+            }
+            
+        }
+        else 
+        {
+            current.PlayerMoving();
+            characterController.SimpleMove(movementVector * Time.deltaTime * speed);
+        }
+        
 
-        current.PlayerMoving();
+        
 
-        if (movementVector != Vector3.zero)
+        if (movementVector != Vector3.zero && dashing == false)
         {
             newRotation = Quaternion.LookRotation(movementVector);
         }
@@ -169,6 +222,23 @@ public class PlayerController : MonoBehaviour
         }
         attacking = false;
         //CAMBIAR
+    }
+
+    //GetDamage function
+    public void Damage(int damage) 
+    {
+        onGetDamage();
+        health -= damage;
+        if (health > 0) 
+        {
+            health = 0;
+            Dead();
+        }
+    }
+
+    public void Dead() 
+    {
+        onDie();
     }
 
     private void OnTriggerStay(Collider other)

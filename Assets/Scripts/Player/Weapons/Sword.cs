@@ -11,7 +11,7 @@ public class Sword : MonoBehaviour
     }
 
     public void Attack() 
-    {
+    {        
         PlayerController.current.health++;
         Debug.Log("Sword Attack!");
         Debug.Log(PlayerController.current.health);
