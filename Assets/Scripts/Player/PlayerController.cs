@@ -17,13 +17,17 @@ public class PlayerController : MonoBehaviour
     //Añadir regeneración de stamina y critico
     public int attack;
     public int health;
+    public float maxHealth;
     public int defense;
     public float speed;
     public float attackSpeed;
-    public int stamina;
+    public float stamina;
+    public float maxStamina;
+    public float staminaRegeneration;
     public float dashSpeed;
     public float dashTime;
     public float dashTimeCounter;
+    public int dashCost;
 
 
     private float moveSide;
@@ -99,6 +103,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public event Action onHealthChange;
+    public void HealthChange()
+    {
+        if (onHealthChange != null)
+        {
+            onHealthChange();
+        }
+    }
+
+    public event Action onStaminaChange;
+    public void StaminaChange()
+    {
+        if (onStaminaChange != null)
+        {
+            onStaminaChange();
+        }
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -118,6 +140,16 @@ public class PlayerController : MonoBehaviour
             {
                 frameCounter++;
             }
+       }
+
+       if (dashing == false && stamina < maxStamina) 
+       {
+            stamina += staminaRegeneration * Time.deltaTime;
+            if (stamina > maxStamina) 
+            {
+                stamina = maxStamina;
+            }
+            StaminaChange();
        }
        
        if (attacking == true) 
@@ -168,13 +200,26 @@ public class PlayerController : MonoBehaviour
     //Move function
     void Move() 
     {
+        if (dashing == true && stamina < dashCost && dashTimeCounter == 0)
+        {
+            dashing = false;
+        }
         if (dashing == false && dashTimeCounter == 0) 
         {
             movementVector = new Vector3(moveSide, 0, moveFront);
         }
-        if (dashing == true) 
+        if (dashing == true)
         {
-            OnDash();
+            if (dashTimeCounter == 0) 
+            {
+                OnDash();
+                stamina -= dashCost;
+                if (stamina < 0) 
+                {
+                    stamina = 0;
+                }
+                StaminaChange();
+            }            
             characterController.SimpleMove(movementVector * dashSpeed * Time.deltaTime);
             if (dashTimeCounter < dashTime) 
             {
@@ -229,11 +274,17 @@ public class PlayerController : MonoBehaviour
     {
         onGetDamage();
         health -= damage;
-        if (health > 0) 
+        if (health < 0) 
         {
             health = 0;
+            HealthChange();
             Dead();
         }
+        else 
+        {
+            HealthChange();
+        }
+        
     }
 
     public void Dead() 

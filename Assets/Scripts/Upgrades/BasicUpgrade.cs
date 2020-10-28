@@ -23,7 +23,7 @@ public class BasicUpgrade : MonoBehaviour
         model = transform.GetChild(0).gameObject;
     }
 
-    public void SetUpgrade(ref int playerAttack, ref float playerRangeAttack, ref float playerAttackSpeed, ref int playerHealth, ref int playerDefense, ref float playerSpeed, ref int playerStamina) 
+    public void SetUpgrade(ref int playerAttack, ref float playerRangeAttack, ref float playerAttackSpeed, ref int playerHealth, ref int playerDefense, ref float playerSpeed, ref float playerStamina) 
     {
         model.SetActive(false);
         influenceRange.enabled = false;
