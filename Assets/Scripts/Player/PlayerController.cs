@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController current;
 
+    public Weapon mainWeapon;
+    public int comboCounter = 0;
+
     private Vector3 movementVector;
 
     //public BasicUpgrade test;
@@ -29,6 +32,9 @@ public class PlayerController : MonoBehaviour
     public float dashTimeCounter;
     public int dashCost;
 
+    public float totalDamage;
+
+    public float attackDrag;
 
     private float moveSide;
     private float moveFront;
@@ -37,7 +43,11 @@ public class PlayerController : MonoBehaviour
     public float attackRange = 0.5f;
 
     public bool invincible = false;
-    private bool attacking = false;
+    public bool attacking = false;
+    public bool inAttack = false;
+    public bool preparingAttack = false;
+    public bool recoveringAttack = false;
+
     private bool interacting = false;
     bool dashing = false;
     private int frameCounter = 0;
@@ -53,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         current = this;
+        mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
         basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
     }
 
@@ -162,17 +173,19 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-    }   
+    }
 
     //INPUTS
 
     //Move input
-    void OnMove(InputValue value) 
+    void OnMove(InputValue value)
     {
-        Debug.Log(value);
-        Debug.Log("Move");
-        moveSide = value.Get<Vector2>().x;
-        moveFront = value.Get<Vector2>().y;
+        if (preparingAttack == false && inAttack == false)
+        {
+            Debug.Log("Move");
+            moveSide = value.Get<Vector2>().x;
+            moveFront = value.Get<Vector2>().y;
+        }
     }
 
     //Attack input
@@ -200,52 +213,64 @@ public class PlayerController : MonoBehaviour
     //Move function
     void Move() 
     {
-        if (dashing == true && stamina < dashCost && dashTimeCounter == 0)
+        if (inAttack == false && preparingAttack == false)
         {
-            dashing = false;
-        }
-        if (dashing == false && dashTimeCounter == 0) 
-        {
-            movementVector = new Vector3(moveSide, 0, moveFront);
-        }
-        if (dashing == true)
-        {
-            if (dashTimeCounter == 0) 
-            {
-                OnDash();
-                stamina -= dashCost;
-                if (stamina < 0) 
-                {
-                    stamina = 0;
-                }
-                StaminaChange();
-            }            
-            characterController.SimpleMove(movementVector * dashSpeed * Time.deltaTime);
-            if (dashTimeCounter < dashTime) 
-            {
-                dashTimeCounter += 1 * Time.deltaTime;
-            }
-            else 
+
+            if (dashing == true && stamina < dashCost && dashTimeCounter == 0)
             {
                 dashing = false;
-                dashTimeCounter = 0f;
             }
-            
-        }
-        else 
-        {
-            current.PlayerMoving();
-            characterController.SimpleMove(movementVector * Time.deltaTime * speed);
-        }
-        
+            if (dashing == false && dashTimeCounter == 0)
+            {
+                movementVector = new Vector3(moveSide, 0, moveFront);
+            }
+            if (dashing == true)
+            {
+                if (recoveringAttack == true) 
+                {
+                    recoveringAttack = false;
+                }
+                if (movementVector == Vector3.zero)
+                {
+                    movementVector = transform.forward;
+                }
+                if (dashTimeCounter == 0)
+                {
+                    OnDash();
+                    stamina -= dashCost;
+                    if (stamina < 0)
+                    {
+                        stamina = 0;
+                    }
+                    StaminaChange();
+                }
+                characterController.SimpleMove(movementVector * dashSpeed * Time.deltaTime);
+                if (dashTimeCounter < dashTime)
+                {
+                    dashTimeCounter += 1 * Time.deltaTime;
+                }
+                else
+                {
+                    dashing = false;
+                    dashTimeCounter = 0f;
+                }
 
-        
+            }
+            else
+            {
+                current.PlayerMoving();
+                characterController.SimpleMove(movementVector * Time.deltaTime * speed);
+            }
 
-        if (movementVector != Vector3.zero && dashing == false)
-        {
-            newRotation = Quaternion.LookRotation(movementVector);
+
+
+
+            if (movementVector != Vector3.zero && dashing == false)
+            {
+                newRotation = Quaternion.LookRotation(movementVector);
+            }
+            playerModel.transform.rotation = newRotation;
         }
-        playerModel.transform.rotation = newRotation;
         
     }
 
@@ -258,13 +283,16 @@ public class PlayerController : MonoBehaviour
 
         //HACER QUE LA FUNCIÓN ACTIVE LA ANIMACIÓN Y DESPUES QUE ESTA LLAME A OTRA FUNCIÓN DE ATAQUE
         //CAMBIAR
-        current.PlayerAttack();
+        
+        
+        
+        PlayerAttack();
 
-        Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
+        /*Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
         foreach (Collider enemy in hitEnemies) 
         {
             Debug.Log("Hit " + enemy.name);
-        }
+        }*/
         attacking = false;
         //CAMBIAR
     }
