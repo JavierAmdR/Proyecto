@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public float totalDamage;
 
     public float attackDrag;
+    
+    public float dragCounter = 0;
 
     private float moveSide;
     private float moveFront;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public bool invincible = false;
     public bool attacking = false;
     public bool inAttack = false;
+    public bool nextAttack = false;
     public bool preparingAttack = false;
     public bool recoveringAttack = false;
 
@@ -180,19 +183,24 @@ public class PlayerController : MonoBehaviour
     //Move input
     void OnMove(InputValue value)
     {
-        if (preparingAttack == false && inAttack == false)
-        {
             Debug.Log("Move");
             moveSide = value.Get<Vector2>().x;
             moveFront = value.Get<Vector2>().y;
-        }
     }
 
     //Attack input
     void OnAttack()
     {
+        if (attacking == false) 
+        {
+            attacking = true;
+        }
+        else if (comboCounter < mainWeapon.comboNumber)
+        {
+            nextAttack = true;
+        }
         Debug.Log("Attack");
-        attacking = true;
+        
     }
 
     void OnInteract() 
@@ -213,23 +221,40 @@ public class PlayerController : MonoBehaviour
     //Move function
     void Move() 
     {
-        if (inAttack == false && preparingAttack == false)
+        if (attacking == true) 
+        {
+            mainWeapon.Attack(comboCounter);
+            inAttack = true;
+            attacking = false;
+        }
+        if (inAttack == true) 
+        {
+            characterController.SimpleMove(transform.forward * attackDrag * Time.deltaTime);       
+            if (dragCounter < mainWeapon.dragTime[comboCounter]) 
+            {
+                dragCounter += 1 * Time.deltaTime;
+            }
+            else 
+            {
+                dragCounter = 0;
+                attackDrag = 0;
+                inAttack = false;
+            }
+        }
+        if (inAttack == false)
         {
 
             if (dashing == true && stamina < dashCost && dashTimeCounter == 0)
             {
                 dashing = false;
             }
-            if (dashing == false && dashTimeCounter == 0)
+            if (dashing == false)
             {
                 movementVector = new Vector3(moveSide, 0, moveFront);
             }
             if (dashing == true)
             {
-                if (recoveringAttack == true) 
-                {
-                    recoveringAttack = false;
-                }
+                
                 if (movementVector == Vector3.zero)
                 {
                     movementVector = transform.forward;
@@ -271,6 +296,7 @@ public class PlayerController : MonoBehaviour
             }
             playerModel.transform.rotation = newRotation;
         }
+        Debug.Log(movementVector);
         
     }
 
@@ -293,7 +319,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Hit " + enemy.name);
         }*/
-        attacking = false;
         //CAMBIAR
     }
 

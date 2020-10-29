@@ -8,15 +8,26 @@ public class Weapon : MonoBehaviour
     public GameObject[] comboHitbox;
     public float[] attackDamage;
     public float[] attackDrag;
+    public float[] dragTime;
 
-    int comboNumber = 0;
+    public int comboNumber = 0;
 
 
     // Start is called before the first frame update
     
-    public void Attack()
-    {        
-        
+    public void Attack(int comboIndex)
+    {
+        PlayerController.current.attackDrag += attackDrag[comboIndex];
         Debug.Log("Sword Attack!");
+    }
+
+    public void ActivateHitbox(int comboIndex) 
+    {
+        comboHitbox[comboIndex].SetActive(true);
+    }
+
+    public void DesactivateHitbox(int comboIndex)
+    {
+        comboHitbox[comboIndex].SetActive(false);
     }
 }
