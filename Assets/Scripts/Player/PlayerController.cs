@@ -142,34 +142,37 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {  
-       if (interacting == true) 
-       {
-            if (frameCounter >= 2) 
+    {
+        if (UIManager.ui.gamePaused == false)
+        {
+            if (interacting == true)
             {
-                interacting = false;
-                frameCounter = 0;
+                if (frameCounter >= 2)
+                {
+                    interacting = false;
+                    frameCounter = 0;
+                }
+                else
+                {
+                    frameCounter++;
+                }
             }
-            else 
-            {
-                frameCounter++;
-            }
-       }
 
-       if (dashing == false && stamina < maxStamina) 
-       {
-            stamina += staminaRegeneration * Time.deltaTime;
-            if (stamina > maxStamina) 
+            if (dashing == false && stamina < maxStamina)
             {
-                stamina = maxStamina;
+                stamina += staminaRegeneration * Time.deltaTime;
+                if (stamina > maxStamina)
+                {
+                    stamina = maxStamina;
+                }
+                StaminaChange();
             }
-            StaminaChange();
-       }
-       
-       if (attacking == true) 
-       {
-            Attack();
-       }
+
+            if (attacking == true)
+            {
+                Attack();
+            }
+        }
        
     }
 
@@ -191,15 +194,18 @@ public class PlayerController : MonoBehaviour
     //Attack input
     void OnAttack()
     {
-        if (attacking == false) 
+        if (UIManager.ui.gamePaused == false)
         {
-            attacking = true;
+            if (attacking == false)
+            {
+                attacking = true;
+            }
+            else if (comboCounter < mainWeapon.comboNumber)
+            {
+                nextAttack = true;
+            }
+            Debug.Log("Attack");
         }
-        else if (comboCounter < mainWeapon.comboNumber)
-        {
-            nextAttack = true;
-        }
-        Debug.Log("Attack");
         
     }
 
@@ -296,7 +302,6 @@ public class PlayerController : MonoBehaviour
             }
             playerModel.transform.rotation = newRotation;
         }
-        Debug.Log(movementVector);
         
     }
 

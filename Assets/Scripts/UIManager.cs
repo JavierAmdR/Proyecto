@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject pausePanel;
 
+    public bool gamePaused = false;
+
 
 
     public Slider healthSlider;
@@ -26,6 +28,25 @@ public class UIManager : MonoBehaviour
         PlayerController.current.onHealthChange += HealthChange;
         PlayerController.current.onStaminaChange += StaminaChange;
 
+    }
+
+
+    public void OnPause() 
+    {
+        
+        
+        Debug.Log("Pause");
+        gamePaused = !gamePaused;
+        
+        if (gamePaused == true)
+        {
+            Time.timeScale = 0;
+        }
+        else 
+        {
+            Time.timeScale = 1;
+        }
+        pausePanel.SetActive(!pausePanel.activeSelf);
     }
 
     public void HealthChange() 
