@@ -18,6 +18,11 @@ public class UIManager : MonoBehaviour
     public Slider healthSlider;
     public Slider staminaSlider;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     private void Start()
     {
         ui = this;
@@ -32,22 +37,26 @@ public class UIManager : MonoBehaviour
 
 
     public void OnPause() 
-    {
-        
+    {      
         
         Debug.Log("Pause");
         gamePaused = !gamePaused;
-        
-        if (gamePaused == true)
-        {
-            Time.timeScale = 0;
-        }
-        else 
-        {
-            Time.timeScale = 1;
-        }
+        SetPauseTime();
         pausePanel.SetActive(!pausePanel.activeSelf);
     }
+
+    public void SetPauseTime()
+    {
+        if (Time.timeScale != 0)
+        {
+            GameManager.current.ChangeTimeScale(0f);
+        }
+        else
+        {
+            GameManager.current.ChangeTimeScale(1f);
+        }
+    }
+
 
     public void HealthChange() 
     {

@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController current;
 
+    public int playerLevel = 0;
+
     public Weapon mainWeapon;
     public int comboCounter = 0;
 
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour
         current = this;
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
         basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
+        DontDestroyOnLoad(this);
     }
 
     //Event Actions
