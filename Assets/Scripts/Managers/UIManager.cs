@@ -26,12 +26,12 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ui = this;
-        healthSlider.maxValue = PlayerController.current.maxHealth;
-        healthSlider.value = PlayerController.current.health;
-        staminaSlider.maxValue = PlayerController.current.stamina;
-        staminaSlider.value = PlayerController.current.stamina;
-        PlayerController.current.onHealthChange += HealthChange;
-        PlayerController.current.onStaminaChange += StaminaChange;
+        healthSlider.maxValue = PlayerStats.current.health.GetValue();
+        healthSlider.value = PlayerStats.current.currentHealth;
+        staminaSlider.maxValue = PlayerStats.current.stamina.GetValue();
+        staminaSlider.value = PlayerStats.current.currentStamina;
+        //PlayerController.current.onHealthChange += HealthChange;
+        //PlayerController.current.onStaminaChange += StaminaChange;
 
     }
 
@@ -58,13 +58,13 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void HealthChange() 
+    public void HealthUpdate() 
     {
-        healthSlider.value = PlayerController.current.health;
+        healthSlider.value = PlayerStats.current.currentHealth;
     }
-    public void StaminaChange()
+    public void StaminaUpdate()
     {
-        staminaSlider.value = PlayerController.current.stamina;
+        staminaSlider.value = PlayerStats.current.currentStamina;
     }
 
 }

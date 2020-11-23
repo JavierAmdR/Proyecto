@@ -10,30 +10,14 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController current;
 
-    public int playerLevel = 0;
-
     public Weapon mainWeapon;
     public int comboCounter = 0;
 
     private Vector3 movementVector;
 
-    //public BasicUpgrade test;
-
-    //Añadir regeneración de stamina y critico
-    public int attack;
-    public int health;
-    public float maxHealth;
-    public int defense;
-    public float speed;
     public float attackSpeed;
-    public float stamina;
-    public float maxStamina;
-    public float staminaRegeneration;
-    public float dashSpeed;
     public float dashTime;
     public float dashTimeCounter;
-    public int dashCost;
-
     public float totalDamage;
 
     public float attackDrag;
@@ -72,78 +56,11 @@ public class PlayerController : MonoBehaviour
         basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
         DontDestroyOnLoad(this);
     }
-
-    //Event Actions
-
-    public event Action onPlayerAttack;
-    public void PlayerAttack() 
-    {        
-        if (onPlayerAttack != null) 
-        {
-            onPlayerAttack();
-        }
-    }
-
-    public event Action onPlayerDamaged;
-    public void PlayerDamaged()
-    {
-        if (onPlayerDamaged != null)
-        {
-            onPlayerDamaged();
-        }
-    }
-
-    public event Action onPlayerMove;
-    public void PlayerMoving()
-    {
-        if (onPlayerMove != null)
-        {
-            onPlayerMove();
-        }
-    }
-
-    public event Action onGetDamage;
-    public void GetDamage()
-    {
-        if (onGetDamage != null)
-        {
-            onGetDamage();
-        }
-    }
-
-    public event Action onDie;
-    public void Die()
-    {
-        if (onDie != null)
-        {
-            onDie();
-        }
-    }
-
-    public event Action onHealthChange;
-    public void HealthChange()
-    {
-        if (onHealthChange != null)
-        {
-            onHealthChange();
-        }
-    }
-
-    public event Action onStaminaChange;
-    public void StaminaChange()
-    {
-        if (onStaminaChange != null)
-        {
-            onStaminaChange();
-        }
-    }
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerModel = GetComponentInChildren<Transform>();
     }
-
     void Update()
     {
         if (UIManager.ui.gamePaused == false)
@@ -161,14 +78,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (dashing == false && stamina < maxStamina)
+            if (dashing == false)
             {
-                stamina += staminaRegeneration * Time.deltaTime;
-                if (stamina > maxStamina)
-                {
-                    stamina = maxStamina;
-                }
-                StaminaChange();
+                PlayerStats.current.StaminaReg();
             }
 
             if (attacking == true)
@@ -222,7 +134,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Dash");
         dashing = true;
-
     }
 
     //FUNCTIONS
@@ -253,7 +164,7 @@ public class PlayerController : MonoBehaviour
         if (inAttack == false)
         {
 
-            if (dashing == true && stamina < dashCost && dashTimeCounter == 0)
+            if (dashing == true && PlayerStats.current.CanDash() == false && dashTimeCounter == 0)
             {
                 dashing = false;
             }
@@ -271,14 +182,9 @@ public class PlayerController : MonoBehaviour
                 if (dashTimeCounter == 0)
                 {
                     OnDash();
-                    stamina -= dashCost;
-                    if (stamina < 0)
-                    {
-                        stamina = 0;
-                    }
-                    StaminaChange();
+                    PlayerStats.current.StaminaDash();
                 }
-                characterController.SimpleMove(movementVector * dashSpeed * Time.deltaTime);
+                characterController.SimpleMove(movementVector * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
                 if (dashTimeCounter < dashTime)
                 {
                     dashTimeCounter += 1 * Time.deltaTime;
@@ -292,8 +198,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                current.PlayerMoving();
-                characterController.SimpleMove(movementVector * Time.deltaTime * speed);
+                PlayerEvents.current.Moving();
+                characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
             }
 
 
@@ -320,7 +226,7 @@ public class PlayerController : MonoBehaviour
         
         
         
-        PlayerAttack();
+        PlayerEvents.current.Attack();
 
         /*Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
         foreach (Collider enemy in hitEnemies) 
@@ -329,35 +235,11 @@ public class PlayerController : MonoBehaviour
         }*/
         //CAMBIAR
     }
-
-    //GetDamage function
-    public void Damage(int damage) 
-    {
-        onGetDamage();
-        health -= damage;
-        if (health < 0) 
-        {
-            health = 0;
-            HealthChange();
-            Dead();
-        }
-        else 
-        {
-            HealthChange();
-        }
-        
-    }
-
-    public void Dead() 
-    {
-        onDie();
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Upgrade" && interacting == true)
         {
-            other.gameObject.GetComponent<BasicUpgrade>().SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);         
+            //other.gameObject.GetComponent<BasicUpgrade>().SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);         
         }
     }    
 
