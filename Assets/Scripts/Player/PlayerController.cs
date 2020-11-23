@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public bool preparingAttack = false;
     public bool recoveringAttack = false;
 
+    private IInteractable interactable;
+
     private bool interacting = false;
     bool dashing = false;
     private int frameCounter = 0;
@@ -235,13 +237,27 @@ public class PlayerController : MonoBehaviour
         }*/
         //CAMBIAR
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Upgrade" && interacting == true)
+        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door")
         {
-            //other.gameObject.GetComponent<BasicUpgrade>().SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);         
+            interactable = GetComponent<IInteractable>();
         }
-    }    
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door") 
+        {
+            interactable = null;
+        }
+        
+    }
+    
+    public void Interact() 
+    {
+        interactable.Interact();
+    }
 
     //EDITOR
 

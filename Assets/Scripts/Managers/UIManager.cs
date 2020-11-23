@@ -30,8 +30,6 @@ public class UIManager : MonoBehaviour
         healthSlider.value = PlayerStats.current.currentHealth;
         staminaSlider.maxValue = PlayerStats.current.stamina.GetValue();
         staminaSlider.value = PlayerStats.current.currentStamina;
-        //PlayerController.current.onHealthChange += HealthChange;
-        //PlayerController.current.onStaminaChange += StaminaChange;
 
     }
 
