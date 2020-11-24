@@ -200,6 +200,8 @@ GameObject:
   - component: {fileID: 581660915030020965}
   - component: {fileID: 581660915030020964}
   - component: {fileID: 581660915030020966}
+  - component: {fileID: 581660914396882662}
+  - component: {fileID: 581660914396882667}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -267,19 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainWeapon: {fileID: 0}
   comboCounter: 0
-  attack: 12
-  health: 50
-  maxHealth: 50
-  defense: 0
-  speed: 300
   attackSpeed: 0.6
-  stamina: 100
-  maxStamina: 100
-  staminaRegeneration: 10
-  dashSpeed: 700
   dashTime: 0.2
   dashTimeCounter: 0
-  dashCost: 25
   totalDamage: 0
   attackDrag: 0
   dragCounter: 0
@@ -314,6 +306,88 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &581660914396882662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581660915030021018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b557f8ae736d754cbfa4ed997f7063f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health:
+    baseValue: 50
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  attack:
+    baseValue: 12
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  defense:
+    baseValue: 0
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  speed:
+    baseValue: 300
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  stamina:
+    baseValue: 100
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  staminaReg:
+    baseValue: 10
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  currentHealth: 0
+  currentStamina: 0
+  dashCost:
+    baseValue: 25
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  dashSpeed:
+    baseValue: 700
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+--- !u!114 &581660914396882667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581660915030021018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baecdbda1bbdbde4d9cea70c246d85f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &581660915471682177
 GameObject:
   m_ObjectHideFlags: 0

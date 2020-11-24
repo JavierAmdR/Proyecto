@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public bool preparingAttack = false;
     public bool recoveringAttack = false;
 
+    public ParticleSystem slash;
+
     private IInteractable interactable;
 
     private bool interacting = false;
