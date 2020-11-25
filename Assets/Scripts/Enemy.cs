@@ -61,6 +61,7 @@ public class Enemy : Character
         navMesh.SetDestination(target.transform.position);
         if (attackRange.targetInRange() == true) 
         {
+            SpeedStop();
             PrepareAttackBehaviour();       
         }
     }
