@@ -36,7 +36,7 @@ public class MeleeEnemy : Enemy
         Debug.Log(attackCollider.activeSelf);
         if (attackCollider.activeSelf == false) 
         {
-            attackCollider.SetActive(true);
+            ActivateAttackCollider(enemyStats.attack.GetValue());
         }
         else 
         {
@@ -50,6 +50,11 @@ public class MeleeEnemy : Enemy
         }
     }
 
+    public virtual void ActivateAttackCollider(int damage) 
+    {
+        attackCollider.SetActive(true);
+        attackCollider.GetComponent<MeleeCollider>().SetDamage(damage);
+    }
     public override void Recovery()
     {
         base.Recovery();

@@ -591,13 +591,14 @@ GameObject:
   - component: {fileID: 595755627}
   - component: {fileID: 595755626}
   - component: {fileID: 595755625}
+  - component: {fileID: 595755628}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &595755624
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +673,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595755623}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &595755628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595755623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3e1a73e6839e74c9dad51628a01f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &619612733
 GameObject:
   m_ObjectHideFlags: 0
@@ -10801,7 +10815,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   targetTag: 
   target: {fileID: 0}
-  attackCollider: {fileID: 1829970991}
+  attackCollider: {fileID: 595755623}
   timeUntilAttack: 0.3
   timeRecoveryAttack: 0.2
   timeActiveAttack: 0.1
@@ -16136,7 +16150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1829970992
 Transform:
   m_ObjectHideFlags: 0

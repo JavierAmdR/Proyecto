@@ -245,6 +245,10 @@ public class PlayerController : MonoBehaviour
         {
             interactable = GetComponent<IInteractable>();
         }
+        if (other.tag == "EnemyAttack") 
+        {
+            PlayerStats.current.ReceiveDamage(other.GetComponent<MeleeCollider>().GetDamageValue());            
+        }
     }
 
     private void OnTriggerExit(Collider other)
