@@ -68,7 +68,7 @@ public class Enemy : Character
 
     public virtual void SpeedStop() 
     {
-        navMesh.speed = 0f;        
+        navMesh.velocity = Vector3.zero;        
     }
 
     public virtual void SetSpeed(int newSpeed) 

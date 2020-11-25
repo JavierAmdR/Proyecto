@@ -30,6 +30,12 @@ public class MeleeEnemy : Enemy
         } 
     }
 
+    public override void Attack()
+    {
+        SpeedStop();
+        base.Attack();
+    }
+
     public override void InAttack()
     {
         base.InAttack();
