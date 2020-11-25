@@ -6,15 +6,22 @@ public class Character : MonoBehaviour
 {
     public enum state { Idle, Moving, Attack, Death}
     public state characterState;
+    public enum attackState { Preparing, Attack, Recovery }
+    public attackState attackStatus;
 
     public void SwitchState(state newState) 
     {
         characterState = newState;
     }
 
+    public void SwitchAttackState(attackState newState)
+    {
+        attackStatus = newState;
+    }
+
     public void Update()
     {
-        CharacterLoop();        
+        CharacterLoop();
     }
 
     public virtual void CharacterLoop() 
@@ -48,7 +55,34 @@ public class Character : MonoBehaviour
 
     public virtual void Attack()
     {
+        switch (attackStatus)
+        {
+            case attackState.Preparing:
+                PreparingAttack();
+                break;
+            case attackState.Attack:
+                InAttack();
+                break;
+            case attackState.Recovery:
+                Recovery();
+                break;
 
+        }
+    }
+
+    public virtual void PreparingAttack() 
+    {
+        
+    }
+
+    public virtual void InAttack() 
+    {
+        
+    }
+
+    public virtual void Recovery() 
+    {
+        
     }
 
     public virtual void Death()

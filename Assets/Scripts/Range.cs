@@ -13,9 +13,14 @@ public class Range : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.tag == target) 
         {
             targetFound = true;
+            if (closestTarget == null) 
+            {
+                closestTarget = other.gameObject;
+            }
         }
     }
 
@@ -25,6 +30,10 @@ public class Range : MonoBehaviour
         if (other.tag == target) 
         {
             targetFound = false;
+            if (closestTarget != null) 
+            {
+                closestTarget = null;
+            }
         }
     }
 
@@ -35,6 +44,7 @@ public class Range : MonoBehaviour
 
     public bool targetInRange() 
     {
+        Debug.Log(targetFound);
         return targetFound;
     }
 

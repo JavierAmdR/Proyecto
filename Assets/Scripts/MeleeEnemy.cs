@@ -3,72 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Enemy
 {
-       
-    public enum state {Idle, Moving, Patrol, Attack, Death}
-    public state enemyState;
-
-    public GameObject model;
-
-    public NavMeshAgent navMesh;
-
-    public GameObject target;
-
-    float timeCounter = 0;
-    public bool preparingAttack = false;
-    public bool inRecovery = false;
-
-    public float attackPreparationTime;
-    public float recoveryAttackTime;
-
-    private void Awake()
+   
+    public GameObject attackCollider;
+    public float timeUntilAttack;
+    public float timeRecoveryAttack;
+    public float timeActiveAttack;
+    float counter = 0f;
+    public override void PrepareAttackBehaviour()
     {
-        navMesh = GetComponent<NavMeshAgent>();
-        enemyState = state.Idle;
+        base.PrepareAttackBehaviour();
+        SpeedStop();
+        SwitchAttackState(attackState.Preparing);
+        SwitchState(state.Attack);
     }
-    public void Update() 
+
+    public override void PreparingAttack()
     {
-        switch (enemyState)
+        base.PreparingAttack();
+        counter += 1 * Time.deltaTime;
+        if (counter >= timeUntilAttack) 
         {
-            case state.Idle:
-                Idle();
-                break;
-            case state.Moving:
-                Moving();
-                break;
-            case state.Patrol:
-                break;
-            case state.Attack:
-                Attack();
-                break;
-            case state.Death:
-                break;
+            counter = 0f;
+            SwitchAttackState(attackState.Attack);
+        } 
+    }
+
+    public override void InAttack()
+    {
+        base.InAttack();
+        Debug.Log(attackCollider.activeSelf);
+        if (attackCollider.activeSelf == false) 
+        {
+            attackCollider.SetActive(true);
+        }
+        else 
+        {
+            counter += 1 * Time.deltaTime;
+            if (counter >= timeActiveAttack) 
+            {
+                counter = 0f;
+                attackCollider.SetActive(false);
+                SwitchAttackState(attackState.Recovery);
+            }
         }
     }
 
-    public void Idle() 
+    public override void Recovery()
     {
-        target = PlayerController.current.gameObject;
-        enemyState = state.Moving;
-                
-    }
-    void StateChange(state changeState) 
-    {
-        
+        base.Recovery();
+        counter += 1 * Time.deltaTime;
+        if (counter >= timeRecoveryAttack) 
+        {
+            counter = 0f;
+            SetNormalSpeed();
+            SwitchState(state.Idle);
+        }
     }
 
-    public void Attack() 
-    {
-        
-    }
-    public void Death() 
-    {
-        
-    }
-    public void Moving() 
-    {
-        navMesh.SetDestination(target.transform.position);        
-        Debug.Log("Enemy Moving");
-    }
+
 }

@@ -12,7 +12,7 @@ public class AttackRange : MonoBehaviour
         if (other.tag == "Player") 
         {
             Debug.Log("Collision Detected");
-            parent.enemyState = MeleeEnemy.state.Attack;
+            //parent.enemyState = MeleeEnemy.state.Attack;
         }
     }
 }
