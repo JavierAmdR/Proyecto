@@ -103,9 +103,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6861058190113242165}
   - component: {fileID: 6861058190113242122}
-  - component: {fileID: 6861058190113242164}
   - component: {fileID: 6861058190113242120}
   - component: {fileID: 6861058190113242123}
+  - component: {fileID: 9013587402917942371}
   m_Layer: 8
   m_Name: RangedEnemyBase
   m_TagString: Untagged
@@ -136,30 +136,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6861058190113242121}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &6861058190113242164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861058190113242121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45ef6f8506a4594ebf8ea5cf3235467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterState: 0
-  attackStatus: 0
-  navMesh: {fileID: 0}
-  rangeDetection: {fileID: 6861058191127526466}
-  attackRange: {fileID: 6861058191993862924}
-  enemyStats: {fileID: 0}
-  targetTag: 
-  target: {fileID: 0}
-  attackCollider: {fileID: 0}
-  timeUntilAttack: 0.5
-  timeRecoveryAttack: 0.2
-  timeActiveAttack: 0.3
 --- !u!195 &6861058190113242120
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -238,6 +214,32 @@ MonoBehaviour:
     modified: 0
   currentHealth: 0
   currentStamina: 0
+--- !u!114 &9013587402917942371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861058190113242121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a7c2a8cd73d5f4a80c3c123a0fd62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterState: 0
+  attackStatus: 0
+  navMesh: {fileID: 0}
+  rangeDetection: {fileID: 6861058191127526466}
+  attackRange: {fileID: 6861058191993862924}
+  enemyStats: {fileID: 0}
+  targetTag: 
+  target: {fileID: 0}
+  Projectile: {fileID: 8067274991713590311, guid: f628dd3f46ea65d43bab7e70ee0e43b4,
+    type: 3}
+  projectileSpeed: 20
+  timeUntilAttack: 0.4
+  timeRecoveryAttack: 1.5
+  timeActiveAttack: 0
 --- !u!1 &6861058190589085652
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6861058191993862914}
   - component: {fileID: 6861058191993862924}
-  - component: {fileID: 9013587403729015657}
+  - component: {fileID: 9013587403729015659}
   m_Layer: 8
   m_Name: AttackRange
   m_TagString: Untagged
@@ -469,16 +471,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: 
---- !u!65 &9013587403729015657
-BoxCollider:
+--- !u!135 &9013587403729015659
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6861058191993862915}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0197754, y: 1.6018715, z: 19.83783}
-  m_Center: {x: 0.091983795, y: 0, z: 9.954262}
+  m_Radius: 15.87
+  m_Center: {x: 0, y: 0, z: 0}
