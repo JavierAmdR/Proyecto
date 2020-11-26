@@ -245,9 +245,15 @@ public class PlayerController : MonoBehaviour
         {
             interactable = GetComponent<IInteractable>();
         }
-        if (other.tag == "EnemyAttack") 
+        switch (other.tag) 
         {
-            PlayerStats.current.ReceiveDamage(other.GetComponent<MeleeCollider>().GetDamageValue());            
+            case ("EnemyAttack"):
+                PlayerStats.current.ReceiveDamage(other.GetComponent<MeleeCollider>().GetDamageValue());
+                break;
+            case ("EnemyProjectile"):
+                PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
+                break;
+
         }
     }
 

@@ -44,7 +44,6 @@ public class Range : MonoBehaviour
 
     public bool targetInRange() 
     {
-        Debug.Log(targetFound);
         return targetFound;
     }
 
