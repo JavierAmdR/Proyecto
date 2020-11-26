@@ -5,10 +5,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
 
     public static PlayerController current;
+    public enum playerStates {Moving, Attack, Dash, Death, Interacting}
+    public playerStates mainState;
+    public enum movingState {inIdle, inMove, inDash}
+    public movingState moveState;
+
 
     public Weapon mainWeapon;
     public int comboCounter = 0;
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         if (UIManager.ui.gamePaused == false)
         {
-            if (interacting == true)
+            /*if (interacting == true)
             {
                 if (frameCounter >= 2)
                 {
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
                 {
                     frameCounter++;
                 }
-            }
+            }*/
 
             if (dashing == false)
             {
@@ -95,19 +100,109 @@ public class PlayerController : MonoBehaviour
        
     }
 
+    public override void CharacterLoop()
+    {
+        if (UIManager.ui.gamePaused == false)
+        {
+            switch (mainState)
+            {
+                case playerStates.Moving:
+                    Move();
+                    break;
+                case playerStates.Attack:
+                    Attack();
+                    break;
+                case playerStates.Dash:
+                    Dash();
+                    break;
+                case playerStates.Death:
+                    Death();
+                    break;
+            }
+        }        
+    }
+
+
+    public void Dash() 
+    {
+        if (movementVector == Vector3.zero)
+        {
+            movementVector = transform.forward;
+        }
+        if (dashTimeCounter == 0)
+        {
+            OnDash();
+            PlayerStats.current.StaminaDash();
+        }
+        characterController.SimpleMove(movementVector * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        if (dashTimeCounter < dashTime)
+        {
+            dashTimeCounter += 1 * Time.deltaTime;
+        }
+        else
+        {
+            dashing = false;
+            dashTimeCounter = 0f;
+        }
+    }
+
+    public void SwitchPlayerState (playerStates newState) 
+    {
+        mainState = newState;
+    }
+
+    public void SwitchMovementState(movingState newState) 
+    {
+        moveState = newState;
+    }
+
+
+
     private void FixedUpdate()
     {
-        Move();
+        CreateMovementVector(moveSide, moveFront);
+        if (movementVector == Vector3.zero && dashing == false) 
+        {
+            moveState = movingState.inIdle;
+        }
+        switch (moveState) 
+        {
+            case movingState.inIdle:
+                break;
+            case movingState.inDash:
+                break;
+            case movingState.inMove:
+                Move();
+                break;
+        }
+    }
+
+
+
+    public bool CheckIdle (Vector3 movement) 
+    {
+        if (movementVector == Vector3.zero && dashing == false) 
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    public void CreateMovementVector(float x, float y) 
+    {
+        movementVector = new Vector3(moveSide, 0, moveFront);
     }
 
     //INPUTS
 
     //Move input
     void OnMove(InputValue value)
-    {
-            Debug.Log("Move");
-            moveSide = value.Get<Vector2>().x;
-            moveFront = value.Get<Vector2>().y;
+    {        
+        moveSide = value.Get<Vector2>().x;
+        moveFront = value.Get<Vector2>().y;
     }
 
     //Attack input
@@ -123,20 +218,17 @@ public class PlayerController : MonoBehaviour
             {
                 nextAttack = true;
             }
-            Debug.Log("Attack");
         }
         
     }
 
     void OnInteract() 
     {
-        Debug.Log("Interact");
         interacting = true;
     }
 
     void OnDash() 
     {
-        Debug.Log("Dash");
         dashing = true;
     }
 
@@ -253,7 +345,6 @@ public class PlayerController : MonoBehaviour
             case ("EnemyProjectile"):
                 PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
                 break;
-
         }
     }
 

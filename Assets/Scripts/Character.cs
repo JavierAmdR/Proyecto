@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     public enum attackState { Preparing, Attack, Recovery }
     public attackState attackStatus;
 
-    public void SwitchState(state newState) 
+    public virtual void SwitchState(state newState) 
     {
         characterState = newState;
     }
