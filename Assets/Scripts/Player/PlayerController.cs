@@ -11,7 +11,7 @@ public class PlayerController : Character
     public static PlayerController current;
     public enum playerStates {Moving, Attack, Dash, Death, Interacting}
     public playerStates mainState;
-    public enum movingState {inIdle, inMove, inDash}
+    public enum movingState {inIdle, inMove, inDash, inAttackDrag}
     public movingState moveState;
 
 
@@ -70,8 +70,9 @@ public class PlayerController : Character
         characterController = GetComponent<CharacterController>();
         playerModel = GetComponentInChildren<Transform>();
     }
-    void Update()
+    /*void Update()
     {
+        CharacterLoop();
         if (UIManager.ui.gamePaused == false)
         {
             /*if (interacting == true)
@@ -87,7 +88,7 @@ public class PlayerController : Character
                 }
             }*/
 
-            if (dashing == false)
+            /*if (dashing == false)
             {
                 PlayerStats.current.StaminaReg();
             }
@@ -98,7 +99,7 @@ public class PlayerController : Character
             }
         }
        
-    }
+    }*/
 
     public override void CharacterLoop()
     {
@@ -125,16 +126,16 @@ public class PlayerController : Character
 
     public void Dash() 
     {
-        if (movementVector == Vector3.zero)
+        /*if (movementVector == Vector3.zero)
         {
             movementVector = transform.forward;
-        }
+        }*/
         if (dashTimeCounter == 0)
         {
             OnDash();
             PlayerStats.current.StaminaDash();
         }
-        characterController.SimpleMove(movementVector * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
         if (dashTimeCounter < dashTime)
         {
             dashTimeCounter += 1 * Time.deltaTime;
@@ -143,6 +144,7 @@ public class PlayerController : Character
         {
             dashing = false;
             dashTimeCounter = 0f;
+            SwitchPlayerState(playerStates.Moving);
         }
     }
 
@@ -160,20 +162,63 @@ public class PlayerController : Character
 
     private void FixedUpdate()
     {
+        MovementLoop();
+    }
+
+    public void MovementLoop() 
+    {
         CreateMovementVector(moveSide, moveFront);
-        if (movementVector == Vector3.zero && dashing == false) 
-        {
-            moveState = movingState.inIdle;
-        }
-        switch (moveState) 
+        CheckMovementState(movementVector);
+        switch (moveState)
         {
             case movingState.inIdle:
+                InMove();
                 break;
             case movingState.inDash:
+                InDash();
                 break;
             case movingState.inMove:
-                Move();
+                InMove();
                 break;
+            case movingState.inAttackDrag:
+                AttackDrag();
+                break;
+        }
+    }
+
+    public void InDash() 
+    {
+        characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+    }
+
+    public void InMove() 
+    {
+        PlayerEvents.current.Moving();
+        characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
+    }
+
+
+    public void AttackDrag() 
+    {
+        
+    }
+
+    public void CheckMovementState (Vector3 movement) 
+    {
+        if (CheckIdle(movement) == true) 
+        {
+            SwitchMovementState(movingState.inIdle);
+        }
+        else 
+        {
+            if (dashing == true) 
+            {
+                SwitchMovementState(movingState.inDash);
+            }
+            else 
+            {
+                SwitchMovementState(movingState.inMove);
+            }
         }
     }
 
@@ -229,7 +274,11 @@ public class PlayerController : Character
 
     void OnDash() 
     {
-        dashing = true;
+        if (mainState == playerStates.Moving) 
+        {
+            SwitchPlayerState(playerStates.Dash);
+            dashing = true;
+        }
     }
 
     //FUNCTIONS
@@ -311,7 +360,7 @@ public class PlayerController : Character
     }
 
     //Attack function
-    void Attack() 
+    /*void Attack() 
     {
         //test.SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);
 
@@ -330,7 +379,7 @@ public class PlayerController : Character
             Debug.Log("Hit " + enemy.name);
         }*/
         //CAMBIAR
-    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door")
