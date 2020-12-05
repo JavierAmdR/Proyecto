@@ -39,7 +39,6 @@ public class MeleeEnemy : Enemy
     public override void InAttack()
     {
         base.InAttack();
-        Debug.Log(attackCollider.activeSelf);
         if (attackCollider.activeSelf == false) 
         {
             ActivateAttackCollider(enemyStats.attack.GetValue());

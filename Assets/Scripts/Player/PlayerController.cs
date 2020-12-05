@@ -19,6 +19,9 @@ public class PlayerController : Character
     public int comboCounter = 0;
 
     private Vector3 movementVector;
+    private float attackTimeCounter = 0;
+    public float inAttackTime = 0;
+    public float recoveryTime = 0;
 
     public float attackSpeed;
     public float dashTime;
@@ -70,36 +73,6 @@ public class PlayerController : Character
         characterController = GetComponent<CharacterController>();
         playerModel = GetComponentInChildren<Transform>();
     }
-    /*void Update()
-    {
-        CharacterLoop();
-        if (UIManager.ui.gamePaused == false)
-        {
-            /*if (interacting == true)
-            {
-                if (frameCounter >= 2)
-                {
-                    interacting = false;
-                    frameCounter = 0;
-                }
-                else
-                {
-                    frameCounter++;
-                }
-            }*/
-
-            /*if (dashing == false)
-            {
-                PlayerStats.current.StaminaReg();
-            }
-
-            if (attacking == true)
-            {
-                Attack();
-            }
-        }
-       
-    }*/
 
     public override void CharacterLoop()
     {
@@ -108,7 +81,7 @@ public class PlayerController : Character
             switch (mainState)
             {
                 case playerStates.Moving:
-                    Move();
+                    Moving();
                     break;
                 case playerStates.Attack:
                     Attack();
@@ -123,19 +96,24 @@ public class PlayerController : Character
         }        
     }
 
-
-    public void Dash() 
+    public override void Moving() 
     {
-        /*if (movementVector == Vector3.zero)
-        {
-            movementVector = transform.forward;
-        }*/
+        PlayerStats.current.StaminaReg();
+    }
+
+    public override void Attack()
+    {
+        base.Attack();
+    }
+
+    public void Dash()
+    {
         if (dashTimeCounter == 0)
         {
             OnDash();
             PlayerStats.current.StaminaDash();
+            SwitchMovementState(movingState.inDash);
         }
-        characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
         if (dashTimeCounter < dashTime)
         {
             dashTimeCounter += 1 * Time.deltaTime;
@@ -145,8 +123,38 @@ public class PlayerController : Character
             dashing = false;
             dashTimeCounter = 0f;
             SwitchPlayerState(playerStates.Moving);
+            SwitchMovementState(movingState.inMove);
         }
     }
+
+    //ATTACK STATES
+    public override void PreparingAttack()
+    {
+        base.PreparingAttack();
+        SwitchAttackState(attackState.Attack);
+    }
+
+    public override void InAttack()
+    {
+        base.InAttack();
+        if (moveState != movingState.inAttackDrag) 
+        {
+            mainWeapon.Attack(comboCounter);
+            SwitchMovementState(movingState.inAttackDrag);
+        }
+        SwitchAttackState(attackState.Recovery);
+    }
+
+    public override void Recovery()
+    {
+        base.Recovery();
+        SwitchAttackState(attackState.Preparing);
+        SwitchMovementState(movingState.inMove);
+        SwitchPlayerState(playerStates.Moving);
+    }
+
+
+
 
     public void SwitchPlayerState (playerStates newState) 
     {
@@ -195,12 +203,15 @@ public class PlayerController : Character
     {
         PlayerEvents.current.Moving();
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
+        if (movementVector != Vector3.zero && dashing == false)
+        {
+            playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
+        }        
     }
-
 
     public void AttackDrag() 
     {
-        
+        characterController.SimpleMove(transform.forward * attackDrag * Time.deltaTime);
     }
 
     public void CheckMovementState (Vector3 movement) 
@@ -253,16 +264,17 @@ public class PlayerController : Character
     //Attack input
     void OnAttack()
     {
-        if (UIManager.ui.gamePaused == false)
+        if (UIManager.ui.gamePaused == false && (mainState == playerStates.Moving || attackStatus == attackState.Recovery))
         {
-            if (attacking == false)
+            /*if (attacking == false)
             {
                 attacking = true;
             }
             else if (comboCounter < mainWeapon.comboNumber)
             {
                 nextAttack = true;
-            }
+            }*/
+            SwitchPlayerState(playerStates.Attack);
         }
         
     }
@@ -274,7 +286,7 @@ public class PlayerController : Character
 
     void OnDash() 
     {
-        if (mainState == playerStates.Moving) 
+        if ((mainState == playerStates.Moving || attackStatus == attackState.Recovery) && PlayerStats.current.CanDash() == true) 
         {
             SwitchPlayerState(playerStates.Dash);
             dashing = true;
@@ -288,13 +300,13 @@ public class PlayerController : Character
     {
         if (attacking == true) 
         {
-            mainWeapon.Attack(comboCounter);
+            
             inAttack = true;
             attacking = false;
         }
         if (inAttack == true) 
         {
-            characterController.SimpleMove(transform.forward * attackDrag * Time.deltaTime);       
+                  
             if (dragCounter < mainWeapon.dragTime[comboCounter]) 
             {
                 dragCounter += 1 * Time.deltaTime;
