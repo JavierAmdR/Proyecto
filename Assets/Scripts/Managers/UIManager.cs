@@ -25,7 +25,14 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        ui = this;
+        if (ui == null)
+        {
+            ui = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         healthSlider.maxValue = PlayerStats.current.health.GetValue();
         healthSlider.value = PlayerStats.current.currentHealth;
         staminaSlider.maxValue = PlayerStats.current.stamina.GetValue();

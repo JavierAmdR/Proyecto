@@ -57,6 +57,12 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        if (PlayerController.current != null) 
+        {
+            PlayerController.current.characterController.enabled = false;
+            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+            PlayerController.current.characterController.enabled = true;
+        }
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
         {
             transition.SetTrigger("CrossfadeEnd");

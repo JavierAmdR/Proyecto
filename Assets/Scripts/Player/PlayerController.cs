@@ -54,7 +54,7 @@ public class PlayerController : Character
     private int frameCounter = 0;
 
     public GameObject basicUpgrades;
-    private CharacterController characterController;
+    public CharacterController characterController;
     [SerializeField] private Transform attackObject;
 
     [SerializeField] private Transform playerModel;
@@ -63,9 +63,6 @@ public class PlayerController : Character
 
     private void Awake()
     {
-        mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
-        basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
-        DontDestroyOnLoad(this);
         if (current == null)
         {
             current = this;
@@ -74,6 +71,9 @@ public class PlayerController : Character
         {
             Destroy(gameObject);
         }
+        mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
+        basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
+        DontDestroyOnLoad(this);       
     }
     void Start()
     {

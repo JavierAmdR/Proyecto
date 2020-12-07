@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TitleScreen.unity
+    path: Assets/Scenes/TitleScreen/TitleScreen.unity
     guid: d5c2667a5ad2b6b4eae80bf167bf7ea3
+  - enabled: 1
+    path: Assets/Scenes/HUB.unity
+    guid: 9d0478e48f486ad479dca63302065881
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Zone1/Room01.unity
+    guid: 8f588ddc485585a48835c0191d3abc9c
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Zone1/Room02.unity
+    guid: 19a835d1be19fd64592e9b5f4bde30a2
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Zone1/Room03.unity
+    guid: ca9b7381e3fa1394a83b297325b1cebe
   - enabled: 1
     path: Assets/Scenes/TestRoom.unity
     guid: 3e75bedea6715894ca6cb5cc5689a74a
