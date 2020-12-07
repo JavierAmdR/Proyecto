@@ -13,6 +13,15 @@ public class GameManager : MonoBehaviour
     {
         transition = GameObject.Find("Crossfade").GetComponent<Animator>();
         DontDestroyOnLoad(this);
+
+        if (current == null) 
+        {
+            current = this;
+        }
+        else 
+        {
+            Object.Destroy(gameObject);
+        }
     }
     void Start()
     {

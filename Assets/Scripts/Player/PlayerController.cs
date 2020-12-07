@@ -63,10 +63,17 @@ public class PlayerController : Character
 
     private void Awake()
     {
-        current = this;
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
         basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
         DontDestroyOnLoad(this);
+        if (current == null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
