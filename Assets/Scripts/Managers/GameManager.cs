@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadCrossfade(int sceneIndex) 
     {
+        Debug.Log(sceneIndex);
         transition.SetTrigger("CrossfadeStart");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadSceneAsync(sceneIndex);
