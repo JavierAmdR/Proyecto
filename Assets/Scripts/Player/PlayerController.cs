@@ -147,6 +147,7 @@ public class PlayerController : Character
         if (moveState != movingState.inAttackDrag) 
         {
             mainWeapon.Attack(comboCounter);
+            mainWeapon.ActivateHitbox(comboCounter);
             SwitchMovementState(movingState.inAttackDrag);
         }
         SwitchAttackState(attackState.Recovery);
@@ -154,6 +155,8 @@ public class PlayerController : Character
 
     public override void Recovery()
     {
+
+        mainWeapon.DesactivateHitbox(comboCounter);
         base.Recovery();
         SwitchAttackState(attackState.Preparing);
         SwitchMovementState(movingState.inMove);
@@ -413,6 +416,32 @@ public class PlayerController : Character
             case ("EnemyProjectile"):
                 PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
                 break;
+            case ("Trap"):
+                if (other.GetComponent<Trap>().isActive == true) 
+                {
+                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
+                }
+                break;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        switch (other.tag) 
+        {
+            case ("Trap"):
+                if (other.GetComponent<Trap>().isActive == true) 
+                {
+                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
+                }
+                break;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy" && moveState == movingState.inDash) 
+        {
+            
         }
     }
 

@@ -9,7 +9,6 @@ public class PlayerEvents : EntityEvents
     private void Awake()
     {
         current = this;
-    }
-   
+    }   
 
 }

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public Animator transition;
     public static GameManager current;
     public float transitionTime = 1f;
+    public bool playingIntro = true;
+    float counter = 0f;
 
     void Awake()
     {
@@ -22,6 +24,26 @@ public class GameManager : MonoBehaviour
         {
             Object.Destroy(gameObject);
         }
+        PlayIntro();
+    }
+
+    public void Update()
+    {
+        if (playingIntro == true) 
+        {
+            counter += Time.deltaTime;
+            if (counter >= 2f) 
+            {
+                counter = 0f;
+                playingIntro = false;
+                LoadScene(1);
+            }
+        }
+    }
+
+    public void PlayIntro() 
+    {
+        transition.SetTrigger("CrossfadeEnd");
     }
     void Start()
     {
@@ -35,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame() 
     {
-        LoadScene(1);
+        LoadScene(2);
     }
 
     public void ExitGame() 
@@ -47,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LoadCrossfade(newScene));
     }
+
 
     IEnumerator LoadCrossfade(int sceneIndex) 
     {

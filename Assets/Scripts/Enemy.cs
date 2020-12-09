@@ -10,6 +10,7 @@ public class Enemy : Character
     public Range rangeDetection;
     public Range attackRange;
     public CharacterStats enemyStats;
+    public ParticleSystem hit;
 
     public string targetTag;
     public GameObject target;
@@ -63,6 +64,21 @@ public class Enemy : Character
         {
             SpeedStop();
             PrepareAttackBehaviour();       
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {        
+        switch (other.tag) 
+        {
+            case "PlayerAttack":
+                Debug.Log("deberia funcionar");
+                enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
+                if (hit != null) 
+                {
+                    hit.Play();
+                }
+                break;
         }
     }
 

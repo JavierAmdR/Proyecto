@@ -7,9 +7,8 @@ public class MainMenuManager : MonoBehaviour
     private GameObject mainMenu;
     private GameObject settingsMenu;
 
-    private void Awake()
+    public void StartGameButton() 
     {
-        mainMenu = GameObject.Find("MainMenu");
-        //settingsMenu = GameObject.Find("");
+        GameManager.current.StartGame();
     }
 }
