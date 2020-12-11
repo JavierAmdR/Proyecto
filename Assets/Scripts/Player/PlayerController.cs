@@ -294,6 +294,11 @@ public class PlayerController : Character
         interacting = true;
     }
 
+    void OnGodMode() 
+    {
+        PlayerStats.current.godMode = !PlayerStats.current.godMode;
+    }
+
     void OnDash() 
     {
         if ((mainState == playerStates.Moving || attackStatus == attackState.Recovery) && PlayerStats.current.CanDash() == true) 
