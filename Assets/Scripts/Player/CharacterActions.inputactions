@@ -52,14 +52,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "GodMode",
-                    "type": "Button",
-                    "id": "6f34c224-d0c3-4e48-9d36-fd9606a93e12",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -346,17 +338,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "47195a09-ff10-4d1a-ac49-8110972766f8",
-                    "path": "<Keyboard>/f10",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad",
-                    "action": "GodMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
