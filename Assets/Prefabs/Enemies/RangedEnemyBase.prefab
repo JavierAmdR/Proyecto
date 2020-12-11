@@ -325,12 +325,14 @@ MonoBehaviour:
   navMesh: {fileID: 0}
   eventSystem: {fileID: 0}
   hitbox: {fileID: 0}
+  currency: 2
   rangeDetection: {fileID: 6861058191127526466}
   attackRange: {fileID: 6861058191993862924}
   enemyStats: {fileID: 0}
   hit: {fileID: 2882743066327197861}
   targetTag: 
   target: {fileID: 0}
+  die: 0
   Projectile: {fileID: 8067274991713590311, guid: f628dd3f46ea65d43bab7e70ee0e43b4,
     type: 3}
   projectileSpeed: 20

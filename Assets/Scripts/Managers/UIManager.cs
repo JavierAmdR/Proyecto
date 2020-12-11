@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;
 
     public bool gamePaused = false;
+
+    public TextMeshProUGUI currencyText;
 
 
 
@@ -70,6 +73,11 @@ public class UIManager : MonoBehaviour
     public void StaminaUpdate()
     {
         staminaSlider.value = PlayerStats.current.currentStamina;
+    }
+
+    public void CurrencyUpdate() 
+    {
+        currencyText.SetText(GameManager.current.currency.ToString());
     }
 
 }

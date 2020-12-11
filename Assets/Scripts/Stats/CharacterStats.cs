@@ -43,6 +43,18 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public virtual bool IsLethal(int damage) 
+    {
+        if (currentHealth - damage <= 0) 
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
     public virtual void StaminaReg()
     {
 

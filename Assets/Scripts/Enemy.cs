@@ -8,7 +8,8 @@ public class Enemy : Character
     [SerializeField]public NavMeshAgent navMesh;
     public EntityEvents eventSystem;
     public Hitbox hitbox;
-    
+
+    public int currency;
     public Range rangeDetection;
     public Range attackRange;
     public CharacterStats enemyStats;
@@ -82,6 +83,10 @@ public class Enemy : Character
 
     public virtual void GetDamage() 
     {
+        if (enemyStats.IsLethal(PlayerStats.current.attack.GetValue()) == true) 
+        {
+            GameManager.current.AddCurency(currency);
+        }
         enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
         if (hit != null)
         {
@@ -89,15 +94,12 @@ public class Enemy : Character
         }
     }
 
-    
-
     private void OnTriggerEnter(Collider other)
     {
         
         switch (other.tag) 
         {
-            case "PlayerAttack":
-               
+            case "PlayerAttack":               
                 break;
         }
     }

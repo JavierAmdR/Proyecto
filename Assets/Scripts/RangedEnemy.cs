@@ -60,7 +60,7 @@ public class RangedEnemy : Enemy
     public override void Attack()
     {
         SpeedStop();
-        transform.LookAt(target.transform);
+        transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
         base.Attack();
     }
 }
