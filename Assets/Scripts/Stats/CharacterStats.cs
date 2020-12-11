@@ -55,6 +55,6 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(this.gameObject);
+        Debug.Log(transform.name + " dies");
     }
 }

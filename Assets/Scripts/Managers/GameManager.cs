@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     public float transitionTime = 1f;
     public bool playingIntro = true;
     float counter = 0f;
-    public GameObject defeatText;
-    public GameObject victoryText;
 
     void Awake()
     {
@@ -72,11 +70,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadCrossfade(newScene));
     }
 
-    public void LoadDefeat() 
-    {
-        StartCoroutine(LoadCrossfadeDefeat());
-    }
-
 
     IEnumerator LoadCrossfade(int sceneIndex) 
     {
@@ -97,29 +90,6 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
         {
             transition.SetTrigger("CrossfadeEnd");
-        }
-    }
-
-    IEnumerator LoadCrossfadeDefeat() 
-    {
-        transition.SetTrigger("CrossfadeStart");
-        defeatText.SetActive(true);
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadSceneAsync(2);
-        while (SceneManager.GetActiveScene().buildIndex != 2)
-        {
-            yield return null;
-        }
-        if (PlayerController.current != null)
-        {
-            PlayerController.current.characterController.enabled = false;
-            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
-            PlayerController.current.characterController.enabled = true;
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            transition.SetTrigger("CrossfadeEnd");
-            defeatText.SetActive(true);
         }
     }
     
