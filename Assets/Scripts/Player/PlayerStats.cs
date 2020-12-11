@@ -8,6 +8,7 @@ public class PlayerStats : CharacterStats
 
     public Stat dashCost;
     public Stat dashSpeed;
+    public bool godMode = false;
     private void Awake()
     {
         InitStats();
@@ -69,7 +70,21 @@ public class PlayerStats : CharacterStats
 
     public override void ReceiveDamage(int damage)
     {
-        base.ReceiveDamage(damage);
-        UIManager.ui.HealthUpdate();
+        if (godMode == false) 
+        {
+            base.ReceiveDamage(damage);
+            UIManager.ui.HealthUpdate();
+        }      
+        
+    }
+    public override void Die()
+    {
+        if (currentHealth <= 0)
+        {
+            UIManager.ui.HealthUpdate();
+            GameManager.current.LoadDefeat();
+            currentHealth = PlayerStats.current.health.GetBaseValue();
+            UIManager.ui.HealthUpdate();
+        }
     }
 }

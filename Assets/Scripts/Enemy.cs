@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Enemy : Character
 {
     [SerializeField]public NavMeshAgent navMesh;
+    public EntityEvents eventSystem;
+    public Hitbox hitbox;
     
     public Range rangeDetection;
     public Range attackRange;
@@ -19,6 +21,15 @@ public class Enemy : Character
     private void Awake()
     {
         Initialization();
+        if (eventSystem != null)
+        {
+            eventSystem.onDamaged += GetDamage;
+        }
+        else 
+        {
+            eventSystem = GetComponent<EntityEvents>();
+            eventSystem.onDamaged += GetDamage;
+        }
     }
 
     public virtual void Initialization() 
@@ -67,17 +78,24 @@ public class Enemy : Character
         }
     }
 
+    public virtual void GetDamage() 
+    {
+        enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
+        if (hit != null)
+        {
+            hit.Play();
+        }
+    }
+
+    
+
     private void OnTriggerEnter(Collider other)
-    {        
+    {
+        
         switch (other.tag) 
         {
             case "PlayerAttack":
-                Debug.Log("deberia funcionar");
-                enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
-                if (hit != null) 
-                {
-                    hit.Play();
-                }
+               
                 break;
         }
     }
