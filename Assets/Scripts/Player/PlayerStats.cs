@@ -12,7 +12,22 @@ public class PlayerStats : CharacterStats
     private void Awake()
     {
         InitStats();
-        current = this;
+        if (current == null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (current == null)
+        {
+            current = this;
+        }
     }
 
 
@@ -83,7 +98,7 @@ public class PlayerStats : CharacterStats
         {
             UIManager.ui.HealthUpdate();
             GameManager.current.LoadDefeat();
-            currentHealth = PlayerStats.current.health.GetBaseValue();
+            currentHealth = health.GetBaseValue();
             UIManager.ui.HealthUpdate();
         }
     }

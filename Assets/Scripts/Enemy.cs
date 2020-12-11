@@ -17,6 +17,8 @@ public class Enemy : Character
     public string targetTag;
     public GameObject target;
 
+    public bool die = false;
+
 
     private void Awake()
     {

@@ -9,7 +9,7 @@ public class PlayerController : Character
 {
 
     public static PlayerController current;
-    public enum playerStates {Moving, Attack, Dash, Death, Interacting}
+    public enum playerStates {Moving, Attack, Dash, Death, Interacting, Ability}
     public playerStates mainState;
     public enum movingState {inIdle, inMove, inDash, inAttackDrag}
     public movingState moveState;
@@ -297,6 +297,7 @@ public class PlayerController : Character
     void OnGodMode() 
     {
         PlayerStats.current.godMode = !PlayerStats.current.godMode;
+        GameManager.current.godModeUI.SetActive(PlayerStats.current.godMode);
     }
 
     void OnDash() 

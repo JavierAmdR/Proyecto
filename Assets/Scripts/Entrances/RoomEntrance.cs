@@ -9,7 +9,7 @@ public class RoomEntrance : MonoBehaviour
     {
         if (other.tag == "Player") 
         {
-            GameManager.current.LoadScene(Random.Range(3, 6));
+            GameManager.current.LoadSceneRandomZone1();
         }        
     }
 }
