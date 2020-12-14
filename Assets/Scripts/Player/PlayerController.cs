@@ -244,7 +244,6 @@ public class PlayerController : Character
     }
 
 
-
     public bool CheckIdle (Vector3 movement) 
     {
         if (movementVector == Vector3.zero && dashing == false) 
@@ -309,105 +308,7 @@ public class PlayerController : Character
         }
     }
 
-    //FUNCTIONS
-
-    //Move function
-    void Move() 
-    {
-        if (attacking == true) 
-        {
-            
-            inAttack = true;
-            attacking = false;
-        }
-        if (inAttack == true) 
-        {
-                  
-            if (dragCounter < mainWeapon.dragTime[comboCounter]) 
-            {
-                dragCounter += 1 * Time.deltaTime;
-            }
-            else 
-            {
-                dragCounter = 0;
-                attackDrag = 0;
-                inAttack = false;
-            }
-        }
-        if (inAttack == false)
-        {
-
-            if (dashing == true && PlayerStats.current.CanDash() == false && dashTimeCounter == 0)
-            {
-                dashing = false;
-            }
-            if (dashing == false)
-            {
-                movementVector = new Vector3(moveSide, 0, moveFront);
-            }
-            if (dashing == true)
-            {
-                
-                if (movementVector == Vector3.zero)
-                {
-                    movementVector = transform.forward;
-                }
-                if (dashTimeCounter == 0)
-                {
-                    OnDash();
-                    PlayerStats.current.StaminaDash();
-                }
-                characterController.SimpleMove(movementVector * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
-                if (dashTimeCounter < dashTime)
-                {
-                    dashTimeCounter += 1 * Time.deltaTime;
-                }
-                else
-                {
-                    dashing = false;
-                    dashTimeCounter = 0f;
-                }
-
-            }
-            else
-            {
-                PlayerEvents.current.Moving();
-                characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
-            }
-
-
-
-
-            if (movementVector != Vector3.zero && dashing == false)
-            {
-                newRotation = Quaternion.LookRotation(movementVector);
-            }
-            playerModel.transform.rotation = newRotation;
-        }
-        
-    }
-
-    //Attack function
-    /*void Attack() 
-    {
-        //test.SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);
-
-        //Debug.Log(attack);
-
-        //HACER QUE LA FUNCIÓN ACTIVE LA ANIMACIÓN Y DESPUES QUE ESTA LLAME A OTRA FUNCIÓN DE ATAQUE
-        //CAMBIAR
-        
-        
-        
-        PlayerEvents.current.Attack();
-
-        /*Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
-        foreach (Collider enemy in hitEnemies) 
-        {
-            Debug.Log("Hit " + enemy.name);
-        }*/
-        //CAMBIAR
-    //}
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door")
@@ -447,7 +348,7 @@ public class PlayerController : Character
     {
         if(collision.gameObject.tag == "Enemy" && moveState == movingState.inDash) 
         {
-            
+                        
         }
     }
 
@@ -463,17 +364,6 @@ public class PlayerController : Character
     public void Interact() 
     {
         interactable.Interact();
-    }
-
-    //EDITOR
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackObject == null)
-        {
-            return;
-        }
-        Gizmos.DrawWireSphere(attackObject.position, attackRange);
     }
 
 
