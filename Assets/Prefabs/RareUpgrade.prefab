@@ -102,7 +102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7730847760929042616}
-  - component: {fileID: 7730847760929042617}
   - component: {fileID: 7730847760929042621}
   m_Layer: 0
   m_Name: RareUpgrade
@@ -127,26 +126,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7730847760929042617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7730847760929042620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce035179dcb61e41a12e9d6c4280166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeName: Test
-  attack: 0
-  attackRange: 0
-  attackSpeed: 0
-  health: 0
-  defense: 0
-  speed: 0
-  stamina: 0
 --- !u!135 &7730847760929042621
 SphereCollider:
   m_ObjectHideFlags: 0
