@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum gameState {Intro ,MainMenu, Gameplay}
+    public gameState currentState;
+
     public Animator transition;
     public static GameManager current;
     public float transitionTime = 1f;
@@ -30,7 +33,19 @@ public class GameManager : MonoBehaviour
         {
             Object.Destroy(gameObject);
         }
-        PlayIntro();
+        switch (SceneManager.GetActiveScene().buildIndex) 
+        {
+            case 0:
+                ChangeGameState(gameState.Intro);
+                PlayIntro();
+                break;
+            case 1:
+                ChangeGameState(gameState.MainMenu);
+                break;
+            default: 
+                ChangeGameState(gameState.Gameplay);
+                break;
+        }        
     }
 
     public void Update()
@@ -50,6 +65,7 @@ public class GameManager : MonoBehaviour
     public void PlayIntro() 
     {
         transition.SetTrigger("CrossfadeEnd");
+        ChangeGameState(gameState.MainMenu);
     }
     void Start()
     {
@@ -70,6 +86,7 @@ public class GameManager : MonoBehaviour
     public void StartGame() 
     {
         LoadScene(2);
+        ChangeGameState(gameState.Gameplay);
     }
 
     public void ExitGame() 
@@ -95,6 +112,11 @@ public class GameManager : MonoBehaviour
     {
         Random.InitState(System.DateTime.Now.Millisecond);
         StartCoroutine(LoadCrossfade(Random.Range(3, 14)));
+    }
+
+    private void ChangeGameState(gameState newState) 
+    {
+        currentState = newState;
     }
 
 

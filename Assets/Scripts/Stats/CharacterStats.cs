@@ -10,6 +10,7 @@ public class CharacterStats : MonoBehaviour
     public Stat speed;
     public Stat stamina;
     public Stat staminaReg;
+    public Stat crit;
 
     public int currentHealth;
     public float currentStamina;

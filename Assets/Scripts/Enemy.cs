@@ -19,6 +19,7 @@ public class Enemy : Character
     public GameObject target;
 
     public bool die = false;
+    private int damage;
 
 
     private void Awake()
@@ -83,11 +84,13 @@ public class Enemy : Character
 
     public virtual void GetDamage() 
     {
-        if (enemyStats.IsLethal(PlayerStats.current.attack.GetValue()) == true) 
+
+        damage = PlayerStats.current.CalculateDamage();
+        if (enemyStats.IsLethal(damage) == true) 
         {
             GameManager.current.AddCurency(currency);
         }
-        enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
+        enemyStats.ReceiveDamage(damage);
         if (hit != null)
         {
             hit.Play();

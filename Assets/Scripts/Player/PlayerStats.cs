@@ -83,6 +83,27 @@ public class PlayerStats : CharacterStats
         ReduceStamina(dashCost.GetValue());
     }
 
+    public int CalculateDamage() 
+    {
+        
+        if (crit.GetValue() != 0) 
+        {
+            return attack.GetValue();
+        }
+        else 
+        {
+            Random.InitState(System.DateTime.Now.Millisecond);
+            if (Random.Range(0, 100) <= crit.GetValue()) 
+            {
+                return attack.GetValue() * 2;
+            }
+            else
+            {
+                return attack.GetValue();
+            }
+        }
+    }
+
     public override void ReceiveDamage(int damage)
     {
         if (godMode == false) 
