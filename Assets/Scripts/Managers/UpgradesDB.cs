@@ -6,5 +6,5 @@ using UnityEngine;
 
 public class UpgradesDB : ScriptableObject
 {
-    
+    public List<Upgrade> allUpgrades;
 }

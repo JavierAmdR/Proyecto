@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9dbf54b66edbb4ca258e579669d1b7, type: 3}
-  m_Name: Test
+  m_Script: {fileID: 11500000, guid: c4e58221b9dc3f44c84050e1d77ca4db, type: 3}
+  m_Name: StandardUpgrades
   m_EditorClassIdentifier: 
-  id: 0
-  upgradeName: 
-  description: 
+  allUpgrades: []

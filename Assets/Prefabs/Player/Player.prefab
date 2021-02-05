@@ -10069,36 +10069,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!1 &581660914289611986
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 581660914289611987}
-  m_Layer: 0
-  m_Name: AttackCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &581660914289611987
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581660914289611986}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 581660914509750298}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581660914326383735
 GameObject:
   m_ObjectHideFlags: 0
@@ -10128,7 +10098,7 @@ Transform:
   m_Children:
   - {fileID: 917208637}
   m_Father: {fileID: 581660914509750298}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581660914509750297
 GameObject:
@@ -10160,7 +10130,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 581660914289611987}
   - {fileID: 581660915627154198}
   - {fileID: 581660914326383728}
   - {fileID: 581660914952497704}
@@ -10258,7 +10227,7 @@ Transform:
   m_Children:
   - {fileID: 291384726}
   m_Father: {fileID: 581660914509750298}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581660915030021018
 GameObject:
@@ -10364,7 +10333,7 @@ MonoBehaviour:
   slash: {fileID: 619612735}
   basicUpgrades: {fileID: 0}
   characterController: {fileID: 0}
-  attackObject: {fileID: 581660914289611987}
+  attackObject: {fileID: 0}
   playerModel: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
@@ -10441,6 +10410,21 @@ MonoBehaviour:
     statDescription: 
     finalValue: 0
     modified: 0
+  crit:
+    baseValue: 0
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  poison:
+    baseValue: 0
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  stunAttacks: 0
   currentHealth: 0
   currentStamina: 0
   dashCost:
@@ -10560,7 +10544,7 @@ Transform:
   m_Children:
   - {fileID: 581660916009151815}
   m_Father: {fileID: 581660914509750298}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581660916009151814
 GameObject:
@@ -10740,7 +10724,7 @@ PrefabInstance:
     - target: {fileID: 78829911135576628, guid: 17d50ae8a2eb2d94391d9a18aa19099c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 78829911135576628, guid: 17d50ae8a2eb2d94391d9a18aa19099c,
         type: 3}

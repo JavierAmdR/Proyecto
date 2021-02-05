@@ -28,6 +28,7 @@ public class PlayerController : Character
     public float dashTimeCounter;
     public float totalDamage;
 
+
     public float attackDrag;
     
     public float dragCounter = 0;
@@ -155,12 +156,20 @@ public class PlayerController : Character
 
     public override void Recovery()
     {
-
-        mainWeapon.DesactivateHitbox(comboCounter);
-        base.Recovery();
-        SwitchAttackState(attackState.Preparing);
-        SwitchMovementState(movingState.inMove);
-        SwitchPlayerState(playerStates.Moving);
+        if (attackTimeCounter >= attackSpeed) 
+        {
+            attackTimeCounter = 0f;
+            mainWeapon.DesactivateHitbox(comboCounter);
+            base.Recovery();
+            SwitchAttackState(attackState.Preparing);
+            SwitchMovementState(movingState.inMove);
+            SwitchPlayerState(playerStates.Moving);
+        }
+        else 
+        {
+            attackTimeCounter += Time.deltaTime;
+        }
+        
     }
 
 
