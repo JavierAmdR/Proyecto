@@ -195,7 +195,10 @@ public class PlayerController : Character
     public void MovementLoop() 
     {
         CreateMovementVector(moveSide, moveFront);
-        CheckMovementState(movementVector);
+        if (moveState != movingState.inAttackDrag) 
+        {
+            CheckMovementState(movementVector);
+        }        
         switch (moveState)
         {
             case movingState.inIdle:
