@@ -4898,7 +4898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &917208637
 Transform:
   m_ObjectHideFlags: 0
@@ -10002,7 +10002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056822240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.79999995, z: 0}
+  m_LocalPosition: {x: 0, y: -1.39, z: 0}
   m_LocalScale: {x: 6, y: 0.1, z: 6}
   m_Children: []
   m_Father: {fileID: 917208637}
@@ -10317,11 +10317,11 @@ MonoBehaviour:
   comboCounter: 0
   inAttackTime: 0
   recoveryTime: 0
-  attackSpeed: 0.6
+  attackSpeed: 0.2
   dashTime: 0.2
   dashTimeCounter: 0
   totalDamage: 0
-  attackDrag: 0
+  attackDrag: 400
   dragCounter: 0
   attackRange: 1.19
   invincible: 0
@@ -10471,7 +10471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &581660915471682178
 Transform:
   m_ObjectHideFlags: 0
@@ -10497,8 +10497,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2790108, y: 0.69, z: 2.2903779}
-  m_Center: {x: 0.01630783, y: 0, z: 0.15518892}
+  m_Size: {x: 3.741105, y: 0.7872382, z: 3.6414218}
+  m_Center: {x: 0.24735498, y: 0, z: 0.60581976}
 --- !u!54 &1127886073
 Rigidbody:
   m_ObjectHideFlags: 0
