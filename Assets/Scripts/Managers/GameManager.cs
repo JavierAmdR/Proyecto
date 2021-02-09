@@ -149,12 +149,21 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        if (PlayerController.current != null) 
+        if (sceneIndex > 1) 
         {
-            PlayerController.current.characterController.enabled = false;
-            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
-            PlayerController.current.characterController.enabled = true;
+            if (PlayerController.current != null)
+            {
+                PlayerController.current.characterController.enabled = false;
+                PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+                PlayerController.current.characterController.enabled = true;
+            }
         }
+        else 
+        {
+            Destroy(PlayerController.current.gameObject);
+            Destroy(UIManager.ui.gameObject);
+            Destroy(CameraManager.current.gameObject);
+        }       
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
         {
             transition.SetTrigger("CrossfadeEnd");

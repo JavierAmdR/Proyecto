@@ -45,6 +45,7 @@ public class PlayerController : Character
     public bool nextAttack = false;
     public bool preparingAttack = false;
     public bool recoveringAttack = false;
+    public bool usingAbility = false;
 
     public ParticleSystem slash;
 
@@ -300,6 +301,11 @@ public class PlayerController : Character
         
     }
 
+    void OnAbility()
+    {
+        usingAbility = true;
+    }
+
     void OnInteract() 
     {
         interacting = true;
@@ -315,7 +321,9 @@ public class PlayerController : Character
     {
         if ((mainState == playerStates.Moving || attackStatus == attackState.Recovery) && PlayerStats.current.CanDash() == true) 
         {
+            mainWeapon.DesactivateHitbox(comboCounter);
             SwitchPlayerState(playerStates.Dash);
+            SwitchAttackState(attackState.Preparing);
             dashing = true;
         }
     }
