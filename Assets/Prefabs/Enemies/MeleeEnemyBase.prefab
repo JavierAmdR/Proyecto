@@ -494,6 +494,10 @@ MonoBehaviour:
   attackRange: {fileID: 8260475511904280948}
   enemyStats: {fileID: 0}
   hit: {fileID: 2739586971136732118}
+  characterPhysics: {fileID: 0}
+  inKnockback: 0
+  knockbackTime: 0.2
+  timeCounter: 0
   targetTag: 
   target: {fileID: 0}
   die: 0
@@ -577,6 +581,21 @@ MonoBehaviour:
     statDescription: 
     finalValue: 0
     modified: 0
+  crit:
+    baseValue: 0
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  poison:
+    baseValue: 0
+    modifiersList: 
+    statName: 
+    statDescription: 
+    finalValue: 0
+    modified: 0
+  stunAttacks: 0
   currentHealth: 0
   currentStamina: 0
 --- !u!65 &1577237206293065208
@@ -600,7 +619,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8260475511104743025}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0

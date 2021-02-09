@@ -14,6 +14,11 @@ public class Enemy : Character
     public Range attackRange;
     public CharacterStats enemyStats;
     public ParticleSystem hit;
+    public Rigidbody characterPhysics;
+
+    public bool inKnockback;
+    public float knockbackTime = 0.4f;
+    public float timeCounter = 0f;
 
     public string targetTag;
     public GameObject target;
@@ -33,6 +38,28 @@ public class Enemy : Character
         {
             eventSystem = GetComponent<EntityEvents>();
             eventSystem.onDamaged += GetDamage;
+        }
+        if (characterPhysics == null) 
+        {
+            characterPhysics = GetComponent<Rigidbody>();
+        } 
+    }
+
+    public override void CharacterLoop()
+    {
+        base.CharacterLoop();
+        if (inKnockback == true) 
+        {
+            if (knockbackTime <= timeCounter) 
+            {
+                characterPhysics.velocity = Vector3.zero;
+                characterPhysics.angularVelocity = Vector3.zero;
+                timeCounter = 0f;
+            }
+            else 
+            {
+                timeCounter = Time.deltaTime;
+            }
         }
     }
 
@@ -91,6 +118,11 @@ public class Enemy : Character
             GameManager.current.AddCurency(currency);
         }
         enemyStats.ReceiveDamage(damage);
+        if (characterPhysics != null) 
+        {
+            Vector3 knockbackDirection = gameObject.transform.position - PlayerController.current.gameObject.transform.position;
+            characterPhysics.AddForce(knockbackDirection.normalized * 500f);
+        }
         if (hit != null)
         {
             hit.Play();
