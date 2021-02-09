@@ -43,6 +43,26 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateLevelUpInterface() 
+    {
+        //foreach(GameObject statcell in )
+    }
+
+    public void IncreseStatPoint(GameObject statcell)
+    {
+
+    }
+
+    public void ApplyStat() 
+    {
+        
+    }
+
+    public void ReduceStatPoint(GameObject statcell) 
+    {
+        
+    }
+
 
     public void OnPause() 
     {      

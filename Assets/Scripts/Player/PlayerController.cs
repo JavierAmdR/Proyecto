@@ -220,6 +220,10 @@ public class PlayerController : Character
     public void InDash() 
     {
         characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        if (CheckIdle(movementVector) != true) 
+        {
+            playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
+        }        
     }
 
     public void InMove() 
@@ -228,13 +232,14 @@ public class PlayerController : Character
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
         if (movementVector != Vector3.zero && dashing == false)
         {
-            playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
+            Quaternion newLook = Quaternion.LookRotation(movementVector);            
+            playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
         }        
     }
 
     public void AttackDrag() 
     {
-        characterController.SimpleMove(transform.forward * attackDrag * Time.deltaTime);
+        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);
     }
 
     public void CheckMovementState (Vector3 movement) 
