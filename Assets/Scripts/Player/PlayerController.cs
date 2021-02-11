@@ -74,7 +74,7 @@ public class PlayerController : Character
             Destroy(gameObject);
         }
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
-        basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
+        //basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
         DontDestroyOnLoad(this);       
     }
     void Start()
@@ -219,7 +219,7 @@ public class PlayerController : Character
 
     public void InDash() 
     {
-        characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        characterController.SimpleMove(playerModel.transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
         if (CheckIdle(movementVector) != true) 
         {
             playerModel.transform.rotation = Quaternion.LookRotation(movementVector);

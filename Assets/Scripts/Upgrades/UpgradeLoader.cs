@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UpgradeLoader : MonoBehaviour
 {
+    public GameObject upgradeSlot;
+
     Upgrade storedUpgrade;
     public void LoadUpgrade(Upgrade newUpgrade) 
     {
