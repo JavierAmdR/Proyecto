@@ -10,6 +10,7 @@ public class Upgrade : ScriptableObject
     public enum stat {Health, Attack, Defense, Speed, Stamina, StaminaReg, Crit, Poison, Stun}
 
     public string id;
+    public rarity upgradeRarity;
     public string upgradeName;
     public string description;
     public stat relatedStat;

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public enum gameState {Intro ,MainMenu, Gameplay}
     public gameState currentState;
 
+    public GameObject exploringMusic;
     public Animator transition;
     public static GameManager current;
     public float transitionTime = 1f;
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
     public void StartGame() 
     {
         LoadScene(2);
+        exploringMusic.SetActive(true);
         ChangeGameState(gameState.Gameplay);
     }
 
@@ -99,6 +101,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadCrossfade(newScene));
     }
 
+
     public void LoadDefeat() 
     {
         StartCoroutine(LoadCrossfadeDefeat());
@@ -111,7 +114,7 @@ public class GameManager : MonoBehaviour
     public void LoadSceneRandomZone1()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        StartCoroutine(LoadCrossfade(Random.Range(3, 14)));
+        StartCoroutine(LoadCrossfade(Random.Range(3, 9)));
     }
 
     private void ChangeGameState(gameState newState) 
@@ -123,24 +126,29 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadCrossfade(int sceneIndex) 
     {
         Debug.Log(sceneIndex);
+        if (sceneIndex < 1) 
+        {
+            exploringMusic.GetComponent<AudioSource>().Stop();
+            exploringMusic.SetActive(false);
+        }
         transition.SetTrigger("CrossfadeStart");
         yield return new WaitForSeconds(transitionTime);
-        if (roomCounter >= 10) 
+        if (roomCounter >= 6) 
         {
-            sceneIndex = 15;
+            sceneIndex = 10;
             SceneManager.LoadSceneAsync(sceneIndex);
             roomCounter++;
         }
         else 
         {
-            if (roomCounter % 3 != 0 || roomCounter < 3)
+            if (roomCounter % 2 != 0 || roomCounter < 2)
             {
                 SceneManager.LoadSceneAsync(sceneIndex);
                 roomCounter++;
             }
             else
             {
-                sceneIndex = 14;
+                sceneIndex = 9;
                 SceneManager.LoadSceneAsync(sceneIndex);
                 roomCounter++;
             }

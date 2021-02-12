@@ -128,7 +128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.95}
+  m_AnchoredPosition: {x: 0, y: 5.74}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8407204960108612698
@@ -245,7 +245,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -495,6 +495,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   hit: {fileID: 2739586971136732118}
   characterPhysics: {fileID: 0}
+  healthbar: {fileID: 8407204960108612698}
   inKnockback: 0
   knockbackTime: 0.2
   timeCounter: 0
@@ -545,13 +546,17 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   attack:
-    baseValue: 5
+    baseValue: 3
     modifiersList: 
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   defense:
     baseValue: 0
@@ -559,13 +564,17 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   speed:
-    baseValue: 5
+    baseValue: 3
     modifiersList: 
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   stamina:
     baseValue: 0
@@ -573,6 +582,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   staminaReg:
     baseValue: 0
@@ -580,6 +591,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   crit:
     baseValue: 0
@@ -587,6 +600,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   poison:
     baseValue: 0
@@ -594,6 +609,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   stunAttacks: 0
   currentHealth: 0
@@ -972,13 +989,14 @@ GameObject:
   - component: {fileID: 9191492916047047732}
   - component: {fileID: 5796504321190447600}
   - component: {fileID: 100997836611022251}
+  - component: {fileID: 3780104193994815536}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1315408505786157612
 RectTransform:
   m_ObjectHideFlags: 0
@@ -996,7 +1014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.19}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9191492916047047732
@@ -1059,6 +1077,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3780104193994815536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661221934490199210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e576466de50d31439c5ce13072360ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8684187602655761211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,15 +1353,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b42527c5b9663d44ab96a8e4702daa1, type: 3}
---- !u!4 &2739586971094863792 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9216251837656316145, guid: 9b42527c5b9663d44ab96a8e4702daa1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6476813854795790145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &2739586971136732118 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 9216251837765311639, guid: 9b42527c5b9663d44ab96a8e4702daa1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6476813854795790145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2739586971094863792 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9216251837656316145, guid: 9b42527c5b9663d44ab96a8e4702daa1,
     type: 3}
   m_PrefabInstance: {fileID: 6476813854795790145}
   m_PrefabAsset: {fileID: 0}

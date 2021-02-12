@@ -23,7 +23,7 @@ public class DatabaseManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public static Upgrade GetUpgradeByID (string ID) 
+    public Upgrade GetUpgradeByID (string ID) 
     {
         return current.upgradeDB.allUpgrades.FirstOrDefault(i => i.id == ID);
         /*foreach(Upgrade upgrade in current.upgradeDB.allUpgrades) 
@@ -36,7 +36,7 @@ public class DatabaseManager : MonoBehaviour
         return null;*/
     }
 
-    public static Upgrade GetRandomUpgrade(string ID)
+    public Upgrade GetRandomUpgrade()
     {
         return current.upgradeDB.allUpgrades[Random.Range(0, current.upgradeDB.allUpgrades.Count())];
         /*foreach(Upgrade upgrade in current.upgradeDB.allUpgrades) 

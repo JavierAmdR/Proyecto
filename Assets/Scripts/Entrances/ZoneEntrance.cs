@@ -8,6 +8,6 @@ public class ZoneEntrance : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        GameManager.current.LoadScene(Random.Range(3,14));
+        GameManager.current.LoadSceneRandomZone1();
     }
 }

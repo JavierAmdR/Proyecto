@@ -47,9 +47,11 @@ public class PlayerController : Character
     public bool recoveringAttack = false;
     public bool usingAbility = false;
 
+    public bool interactableInRange = false;
+
     public ParticleSystem slash;
 
-    private IInteractable interactable;
+    private Interactable interactableItem;
 
     private bool interacting = false;
     bool dashing = false;
@@ -121,6 +123,7 @@ public class PlayerController : Character
         {
             OnDash();
             PlayerStats.current.StaminaDash();
+            invincible = true;
             SwitchMovementState(movingState.inDash);
         }
         if (dashTimeCounter < dashTime)
@@ -129,6 +132,7 @@ public class PlayerController : Character
         }
         else
         {
+            invincible = false;
             dashing = false;
             dashTimeCounter = 0f;
             SwitchPlayerState(playerStates.Moving);
@@ -223,7 +227,7 @@ public class PlayerController : Character
         if (CheckIdle(movementVector) != true) 
         {
             playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
-        }        
+        }
     }
 
     public void InMove() 
@@ -313,7 +317,10 @@ public class PlayerController : Character
 
     void OnInteract() 
     {
-        interacting = true;
+        if (interactableInRange == true) 
+        {
+            interactableItem.interacting = true;
+        }
     }
 
     void OnGodMode() 
@@ -336,9 +343,10 @@ public class PlayerController : Character
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door")
+        if (other.tag == "Interactable")
         {
-            interactable = GetComponent<IInteractable>();
+            interactableInRange = true;
+            interactableItem = other.gameObject.GetComponent<Interactable>();
         }
         switch (other.tag) 
         {
@@ -348,10 +356,11 @@ public class PlayerController : Character
             case ("EnemyProjectile"):
                 PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
                 break;
-            case ("Trap"):
-                if (other.GetComponent<Trap>().isActive == true) 
+            case ("TrapDamage"):
+                if (other.transform.parent.GetComponent<Trap>().isActive == true) 
                 {
-                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
+                    PlayerStats.current.ReceiveDamage(other.transform.parent.GetComponent<Trap>().damage);                    
+                    //other.transform.parent.GetComponent<Trap>().DisableDamage();
                 }
                 break;
         }
@@ -359,15 +368,7 @@ public class PlayerController : Character
 
     private void OnTriggerStay(Collider other)
     {
-        switch (other.tag) 
-        {
-            case ("Trap"):
-                if (other.GetComponent<Trap>().isActive == true) 
-                {
-                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
-                }
-                break;
-        }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -379,16 +380,17 @@ public class PlayerController : Character
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door") 
+        if (other.tag == "Interactable") 
         {
-            interactable = null;
+            interactableInRange = false;
+            interactableItem = null;
         }
         
     }
     
     public void Interact() 
     {
-        interactable.Interact();
+        
     }
 
 

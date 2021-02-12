@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UpgradeLoader : MonoBehaviour
 {
-    public GameObject upgradeSlot;
 
     Upgrade storedUpgrade;
     public void LoadUpgrade(Upgrade newUpgrade) 
     {
         storedUpgrade = newUpgrade;
+        UpgradeList.current.AddUpgrade(newUpgrade);
         switch (newUpgrade.triggerType) 
         {
             case Upgrade.trigger.OnObtained:
@@ -27,6 +27,8 @@ public class UpgradeLoader : MonoBehaviour
         {
             case Upgrade.stat.Health:
                 PlayerStats.current.health.AddModifier(newUpgrade.value);
+                PlayerStats.current.currentHealth += (newUpgrade.value);
+                UIManager.ui.HealthUpdate();
                 break;
             case Upgrade.stat.Attack:
                 PlayerStats.current.attack.AddModifier(newUpgrade.value);

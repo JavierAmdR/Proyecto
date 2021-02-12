@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI currencyText;
 
+    public GameObject abilityPanel;
+    public GameObject levelUpPanel;
+
 
 
     public Slider healthSlider;
@@ -50,7 +53,29 @@ public class UIManager : MonoBehaviour
 
     public void IncreseStatPoint(GameObject statcell)
     {
-
+        if (GameManager.current.currency > 50)
+        {
+            GameManager.current.currency -= 50;
+            CurrencyUpdate();
+            switch (statcell.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text) 
+            {
+                case ("Health"): 
+                    PlayerStats.current.health.AddLevel();
+                    break;
+                case ("Attack"):
+                    PlayerStats.current.attack.AddLevel();
+                    break;
+                case ("Speed"):
+                    PlayerStats.current.speed.AddLevel();
+                    break;
+                case ("Stamina"):
+                    PlayerStats.current.stamina.AddLevel();
+                    break;
+                case ("Stamina reg."):
+                    PlayerStats.current.staminaReg.AddLevel();
+                    break;
+            }
+        }
     }
 
     public void ApplyStat() 
@@ -58,11 +83,28 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void OpenLevelUpPanel() 
+    {
+        levelUpPanel.SetActive(true);
+    }
+
     public void ReduceStatPoint(GameObject statcell) 
     {
         
     }
 
+    public void OnAbilityPanel() 
+    {
+        if (gamePaused == false && abilityPanel.activeSelf == false) 
+        {
+            abilityPanel.SetActive(true);
+            abilityPanel.GetComponent<UpgradePanel>().LoadUpgrades();
+        }
+        else if (abilityPanel.activeSelf == true)
+        {
+            abilityPanel.SetActive(false);
+        }
+    }
 
     public void OnPause() 
     {      
@@ -71,6 +113,13 @@ public class UIManager : MonoBehaviour
         gamePaused = !gamePaused;
         SetPauseTime();
         pausePanel.SetActive(!pausePanel.activeSelf);
+        CloseAllPanels();
+    }
+
+    public void CloseAllPanels() 
+    {
+        abilityPanel.SetActive(false);
+        levelUpPanel.SetActive(false);
     }
 
     public void SetPauseTime()

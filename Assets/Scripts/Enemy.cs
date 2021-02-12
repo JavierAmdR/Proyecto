@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : Character
 {
@@ -15,6 +16,8 @@ public class Enemy : Character
     public CharacterStats enemyStats;
     public ParticleSystem hit;
     public Rigidbody characterPhysics;
+
+    public Slider healthbar;
 
     public bool inKnockback;
     public float knockbackTime = 0.4f;
@@ -72,6 +75,11 @@ public class Enemy : Character
             targetTag = "Player";
             SetNewTarget(targetTag);
         }
+        if (healthbar != null) 
+        {
+            healthbar.maxValue = enemyStats.health.GetValue();
+            healthbar.value = enemyStats.health.GetValue();
+        }
 
         SetNormalSpeed();
         SwitchState(state.Idle);
@@ -113,6 +121,10 @@ public class Enemy : Character
     {
 
         damage = PlayerStats.current.CalculateDamage();
+        if (healthbar != null) 
+        {
+            healthbar.value -= damage;
+        }        
         if (enemyStats.IsLethal(damage) == true) 
         {
             GameManager.current.AddCurency(currency);

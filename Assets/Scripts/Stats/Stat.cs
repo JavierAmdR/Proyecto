@@ -12,6 +12,8 @@ public class Stat
     public string statName;
     public string statDescription;
     public int finalValue;
+    public int levelValueAdd;
+    public int levelNumber = 0;
 
     public bool modified = false;
 
@@ -38,6 +40,12 @@ public class Stat
     {
         finalValue = baseValue;
         modifiersList.ForEach(x => finalValue += x);
+        finalValue += levelNumber * levelValueAdd;
+    }
+
+    public void AddLevel() 
+    {
+        levelNumber += 1;
     }
 
     public void AddModifier (int modifier) 
@@ -45,6 +53,7 @@ public class Stat
         if (modifier != 0) 
         {
             modifiersList.Add(modifier);
+            RecalculateValue();
             finalValue += modifier;
             modified = true;
         }
