@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(LoadIntro(1));
             }
         }
+        if (SceneManager.GetActiveScene().buildIndex == 2 && PlayerStats.current.currentHealth != PlayerStats.current.health.GetValue()) 
+        {
+            PlayerStats.current.currentHealth = PlayerStats.current.health.GetValue();
+        }
     }
 
     public void PlayIntro() 
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
     public void LoadSceneRandomZone1()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        StartCoroutine(LoadCrossfade(Random.Range(3, 9)));
+        StartCoroutine(LoadCrossfade(Random.Range(3, 8)));
     }
 
     private void ChangeGameState(gameState newState) 
@@ -135,7 +139,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         if (roomCounter >= 6) 
         {
-            sceneIndex = 10;
+            sceneIndex = 9;
             SceneManager.LoadSceneAsync(sceneIndex);
             roomCounter++;
         }
@@ -148,7 +152,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                sceneIndex = 9;
+                sceneIndex = 8;
                 SceneManager.LoadSceneAsync(sceneIndex);
                 roomCounter++;
             }
@@ -217,7 +221,7 @@ public class GameManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            roomCounter = 0;
+            roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
             defeatText.SetActive(false);
         }
@@ -241,7 +245,7 @@ public class GameManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            roomCounter = 0;
+            roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
             victoryText.SetActive(false);
         }

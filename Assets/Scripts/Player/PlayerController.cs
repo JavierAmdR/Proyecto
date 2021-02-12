@@ -224,7 +224,7 @@ public class PlayerController : Character
     public void InDash() 
     {
         characterController.SimpleMove(playerModel.transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
-        if (CheckIdle(movementVector) != true) 
+        if (CheckIdle(movementVector) == true) 
         {
             playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
         }

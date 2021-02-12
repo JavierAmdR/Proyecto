@@ -10398,13 +10398,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 4
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &581660914396882662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10423,6 +10423,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   attack:
     baseValue: 20
@@ -10430,6 +10432,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   defense:
     baseValue: 0
@@ -10437,6 +10441,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   speed:
     baseValue: 400
@@ -10444,6 +10450,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   stamina:
     baseValue: 100
@@ -10451,6 +10459,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   staminaReg:
     baseValue: 10
@@ -10458,6 +10468,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   crit:
     baseValue: 0
@@ -10465,6 +10477,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   poison:
     baseValue: 0
@@ -10472,6 +10486,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   stunAttacks: 0
   currentHealth: 0
@@ -10482,6 +10498,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   dashSpeed:
     baseValue: 700
@@ -10489,6 +10507,8 @@ MonoBehaviour:
     statName: 
     statDescription: 
     finalValue: 0
+    levelValueAdd: 0
+    levelNumber: 0
     modified: 0
   godMode: 0
 --- !u!114 &581660914396882667
@@ -11199,8 +11219,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: -0.030646749, z: -1.045888}
-    m_Extent: {x: 0.13742366, y: 0.035294265, z: 1.0421495}
+    m_Center: {x: 0, y: -0.9191648, z: -0.44595298}
+    m_Extent: {x: 0.13742721, y: 0.92381227, z: 0.44221446}
   m_DirtyAABB: 0
 --- !u!183 &166501448
 Cloth:
@@ -11480,8 +11500,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: 0.033136874, z: 0.0059445966}
-    m_Extent: {x: 0.11265718, y: 0.43077922, z: 0.016797546}
+    m_Center: {x: -0.000056236982, y: 0.03281501, z: 0.00057965517}
+    m_Extent: {x: 0.11286051, y: 0.43110108, z: 0.011432606}
   m_DirtyAABB: 0
 --- !u!1 &7890149627341472463
 GameObject:
@@ -11526,6 +11546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7fc3d94440ce34da15cb7d3db55740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obtainedUpgrades: []
 --- !u!183 &1197098401
 Cloth:
   m_ObjectHideFlags: 0
@@ -11762,8 +11783,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.000000029802322, y: 0.15643811, z: -0.022368185}
-    m_Extent: {x: 0.10398869, y: 0.307478, z: 0.046912313}
+    m_Center: {x: -0.00048661232, y: 0.15409988, z: -0.017479107}
+    m_Extent: {x: 0.10447526, y: 0.30981624, z: 0.042023234}
   m_DirtyAABB: 0
 --- !u!1001 &1188070334
 PrefabInstance:

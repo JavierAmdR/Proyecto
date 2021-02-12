@@ -42,7 +42,7 @@ public class RangedEnemy : Enemy
 
     public virtual void SpawnProjectile(GameObject projectile, int damage, float speed) 
     {
-        newProjectile = Instantiate(projectile, this.transform.position, this.transform.rotation);
+        newProjectile = Instantiate(projectile, raycastSpawner.transform.position, this.transform.rotation);
         newProjectile.GetComponent<Projectile>().PrepareProjectile(damage, speed);
 
     }

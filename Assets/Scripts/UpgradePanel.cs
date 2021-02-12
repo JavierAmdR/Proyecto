@@ -19,7 +19,7 @@ public class UpgradePanel : MonoBehaviour
         {
             newSlot = Instantiate(upgradeSlot, upgradeStorage.transform);
             newSlot.SetActive(true);
-            newSlot.transform.Find("UpgradeName").GetComponent<TextMeshProUGUI>().text = upgrade.name;
+            newSlot.transform.Find("UpgradeName").GetComponent<TextMeshProUGUI>().text = upgrade.upgradeName;
             switch (upgrade.upgradeRarity) 
             {
                 case Upgrade.rarity.Common:
