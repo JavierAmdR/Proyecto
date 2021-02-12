@@ -28,6 +28,7 @@ public class PlayerController : Character
     public float dashTimeCounter;
     public float totalDamage;
 
+
     public float attackDrag;
     
     public float dragCounter = 0;
@@ -44,10 +45,13 @@ public class PlayerController : Character
     public bool nextAttack = false;
     public bool preparingAttack = false;
     public bool recoveringAttack = false;
+    public bool usingAbility = false;
+
+    public bool interactableInRange = false;
 
     public ParticleSystem slash;
 
-    private IInteractable interactable;
+    private Interactable interactableItem;
 
     private bool interacting = false;
     bool dashing = false;
@@ -72,7 +76,7 @@ public class PlayerController : Character
             Destroy(gameObject);
         }
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
-        basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
+        //basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
         DontDestroyOnLoad(this);       
     }
     void Start()
@@ -119,6 +123,7 @@ public class PlayerController : Character
         {
             OnDash();
             PlayerStats.current.StaminaDash();
+            invincible = true;
             SwitchMovementState(movingState.inDash);
         }
         if (dashTimeCounter < dashTime)
@@ -127,6 +132,7 @@ public class PlayerController : Character
         }
         else
         {
+            invincible = false;
             dashing = false;
             dashTimeCounter = 0f;
             SwitchPlayerState(playerStates.Moving);
@@ -155,12 +161,20 @@ public class PlayerController : Character
 
     public override void Recovery()
     {
-
-        mainWeapon.DesactivateHitbox(comboCounter);
-        base.Recovery();
-        SwitchAttackState(attackState.Preparing);
-        SwitchMovementState(movingState.inMove);
-        SwitchPlayerState(playerStates.Moving);
+        if (attackTimeCounter >= attackSpeed) 
+        {
+            attackTimeCounter = 0f;
+            mainWeapon.DesactivateHitbox(comboCounter);
+            base.Recovery();
+            SwitchAttackState(attackState.Preparing);
+            SwitchMovementState(movingState.inMove);
+            SwitchPlayerState(playerStates.Moving);
+        }
+        else 
+        {
+            attackTimeCounter += Time.deltaTime;
+        }
+        
     }
 
 
@@ -186,7 +200,10 @@ public class PlayerController : Character
     public void MovementLoop() 
     {
         CreateMovementVector(moveSide, moveFront);
-        CheckMovementState(movementVector);
+        if (moveState != movingState.inAttackDrag) 
+        {
+            CheckMovementState(movementVector);
+        }        
         switch (moveState)
         {
             case movingState.inIdle:
@@ -206,7 +223,11 @@ public class PlayerController : Character
 
     public void InDash() 
     {
-        characterController.SimpleMove(transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        characterController.SimpleMove(playerModel.transform.forward * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
+        if (CheckIdle(movementVector) == true) 
+        {
+            playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
+        }
     }
 
     public void InMove() 
@@ -215,13 +236,14 @@ public class PlayerController : Character
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
         if (movementVector != Vector3.zero && dashing == false)
         {
-            playerModel.transform.rotation = Quaternion.LookRotation(movementVector);
+            Quaternion newLook = Quaternion.LookRotation(movementVector);            
+            playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
         }        
     }
 
     public void AttackDrag() 
     {
-        characterController.SimpleMove(transform.forward * attackDrag * Time.deltaTime);
+        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);
     }
 
     public void CheckMovementState (Vector3 movement) 
@@ -242,7 +264,6 @@ public class PlayerController : Character
             }
         }
     }
-
 
 
     public bool CheckIdle (Vector3 movement) 
@@ -289,9 +310,17 @@ public class PlayerController : Character
         
     }
 
+    void OnAbility()
+    {
+        usingAbility = true;
+    }
+
     void OnInteract() 
     {
-        interacting = true;
+        if (interactableInRange == true) 
+        {
+            interactableItem.interacting = true;
+        }
     }
 
     void OnGodMode() 
@@ -304,115 +333,20 @@ public class PlayerController : Character
     {
         if ((mainState == playerStates.Moving || attackStatus == attackState.Recovery) && PlayerStats.current.CanDash() == true) 
         {
+            mainWeapon.DesactivateHitbox(comboCounter);
             SwitchPlayerState(playerStates.Dash);
+            SwitchAttackState(attackState.Preparing);
             dashing = true;
         }
     }
 
-    //FUNCTIONS
-
-    //Move function
-    void Move() 
-    {
-        if (attacking == true) 
-        {
-            
-            inAttack = true;
-            attacking = false;
-        }
-        if (inAttack == true) 
-        {
-                  
-            if (dragCounter < mainWeapon.dragTime[comboCounter]) 
-            {
-                dragCounter += 1 * Time.deltaTime;
-            }
-            else 
-            {
-                dragCounter = 0;
-                attackDrag = 0;
-                inAttack = false;
-            }
-        }
-        if (inAttack == false)
-        {
-
-            if (dashing == true && PlayerStats.current.CanDash() == false && dashTimeCounter == 0)
-            {
-                dashing = false;
-            }
-            if (dashing == false)
-            {
-                movementVector = new Vector3(moveSide, 0, moveFront);
-            }
-            if (dashing == true)
-            {
-                
-                if (movementVector == Vector3.zero)
-                {
-                    movementVector = transform.forward;
-                }
-                if (dashTimeCounter == 0)
-                {
-                    OnDash();
-                    PlayerStats.current.StaminaDash();
-                }
-                characterController.SimpleMove(movementVector * PlayerStats.current.dashSpeed.GetValue() * Time.deltaTime);
-                if (dashTimeCounter < dashTime)
-                {
-                    dashTimeCounter += 1 * Time.deltaTime;
-                }
-                else
-                {
-                    dashing = false;
-                    dashTimeCounter = 0f;
-                }
-
-            }
-            else
-            {
-                PlayerEvents.current.Moving();
-                characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
-            }
-
-
-
-
-            if (movementVector != Vector3.zero && dashing == false)
-            {
-                newRotation = Quaternion.LookRotation(movementVector);
-            }
-            playerModel.transform.rotation = newRotation;
-        }
-        
-    }
-
-    //Attack function
-    /*void Attack() 
-    {
-        //test.SetUpgrade(ref attack, ref attackRange, ref attackSpeed, ref health, ref defense, ref speed, ref stamina);
-
-        //Debug.Log(attack);
-
-        //HACER QUE LA FUNCIÓN ACTIVE LA ANIMACIÓN Y DESPUES QUE ESTA LLAME A OTRA FUNCIÓN DE ATAQUE
-        //CAMBIAR
-        
-        
-        
-        PlayerEvents.current.Attack();
-
-        /*Collider[] hitEnemies = Physics.OverlapSphere(attackObject.position, attackRange, enemyLayer);
-        foreach (Collider enemy in hitEnemies) 
-        {
-            Debug.Log("Hit " + enemy.name);
-        }*/
-        //CAMBIAR
-    //}
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door")
+        if (other.tag == "Interactable")
         {
-            interactable = GetComponent<IInteractable>();
+            interactableInRange = true;
+            interactableItem = other.gameObject.GetComponent<Interactable>();
         }
         switch (other.tag) 
         {
@@ -422,10 +356,11 @@ public class PlayerController : Character
             case ("EnemyProjectile"):
                 PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
                 break;
-            case ("Trap"):
-                if (other.GetComponent<Trap>().isActive == true) 
+            case ("TrapDamage"):
+                if (other.transform.parent.GetComponent<Trap>().isActive == true) 
                 {
-                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
+                    PlayerStats.current.ReceiveDamage(other.transform.parent.GetComponent<Trap>().damage);                    
+                    //other.transform.parent.GetComponent<Trap>().DisableDamage();
                 }
                 break;
         }
@@ -433,47 +368,29 @@ public class PlayerController : Character
 
     private void OnTriggerStay(Collider other)
     {
-        switch (other.tag) 
-        {
-            case ("Trap"):
-                if (other.GetComponent<Trap>().isActive == true) 
-                {
-                    PlayerStats.current.ReceiveDamage(other.GetComponent<Trap>().damage);
-                }
-                break;
-        }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy" && moveState == movingState.inDash) 
         {
-            
+                        
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Upgrade" || other.tag == "NPC" || other.tag == "Door") 
+        if (other.tag == "Interactable") 
         {
-            interactable = null;
+            interactableInRange = false;
+            interactableItem = null;
         }
         
     }
     
     public void Interact() 
     {
-        interactable.Interact();
-    }
-
-    //EDITOR
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackObject == null)
-        {
-            return;
-        }
-        Gizmos.DrawWireSphere(attackObject.position, attackRange);
+        
     }
 
 

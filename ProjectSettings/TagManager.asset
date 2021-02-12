@@ -12,6 +12,8 @@ TagManager:
   - Environment
   - EnemyProjectile
   - Trap
+  - TrapDamage
+  - Interactable
   layers:
   - Default
   - TransparentFX

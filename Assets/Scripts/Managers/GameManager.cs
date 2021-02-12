@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum gameState {Intro ,MainMenu, Gameplay}
+    public gameState currentState;
+
+    public GameObject exploringMusic;
     public Animator transition;
     public static GameManager current;
     public float transitionTime = 1f;
@@ -30,7 +34,19 @@ public class GameManager : MonoBehaviour
         {
             Object.Destroy(gameObject);
         }
-        PlayIntro();
+        switch (SceneManager.GetActiveScene().buildIndex) 
+        {
+            case 0:
+                ChangeGameState(gameState.Intro);
+                PlayIntro();
+                break;
+            case 1:
+                ChangeGameState(gameState.MainMenu);
+                break;
+            default: 
+                ChangeGameState(gameState.Gameplay);
+                break;
+        }        
     }
 
     public void Update()
@@ -45,11 +61,16 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(LoadIntro(1));
             }
         }
+        if (SceneManager.GetActiveScene().buildIndex == 2 && PlayerStats.current.currentHealth != PlayerStats.current.health.GetValue()) 
+        {
+            PlayerStats.current.currentHealth = PlayerStats.current.health.GetValue();
+        }
     }
 
     public void PlayIntro() 
     {
         transition.SetTrigger("CrossfadeEnd");
+        ChangeGameState(gameState.MainMenu);
     }
     void Start()
     {
@@ -70,6 +91,8 @@ public class GameManager : MonoBehaviour
     public void StartGame() 
     {
         LoadScene(2);
+        exploringMusic.SetActive(true);
+        ChangeGameState(gameState.Gameplay);
     }
 
     public void ExitGame() 
@@ -81,6 +104,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LoadCrossfade(newScene));
     }
+
 
     public void LoadDefeat() 
     {
@@ -94,31 +118,41 @@ public class GameManager : MonoBehaviour
     public void LoadSceneRandomZone1()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        StartCoroutine(LoadCrossfade(Random.Range(3, 14)));
+        StartCoroutine(LoadCrossfade(Random.Range(3, 8)));
+    }
+
+    private void ChangeGameState(gameState newState) 
+    {
+        currentState = newState;
     }
 
 
     IEnumerator LoadCrossfade(int sceneIndex) 
     {
         Debug.Log(sceneIndex);
+        if (sceneIndex < 1) 
+        {
+            exploringMusic.GetComponent<AudioSource>().Stop();
+            exploringMusic.SetActive(false);
+        }
         transition.SetTrigger("CrossfadeStart");
         yield return new WaitForSeconds(transitionTime);
-        if (roomCounter >= 10) 
+        if (roomCounter >= 6) 
         {
-            sceneIndex = 15;
+            sceneIndex = 9;
             SceneManager.LoadSceneAsync(sceneIndex);
             roomCounter++;
         }
         else 
         {
-            if (roomCounter % 3 != 0 || roomCounter < 3)
+            if (roomCounter % 2 != 0 || roomCounter < 2)
             {
                 SceneManager.LoadSceneAsync(sceneIndex);
                 roomCounter++;
             }
             else
             {
-                sceneIndex = 14;
+                sceneIndex = 8;
                 SceneManager.LoadSceneAsync(sceneIndex);
                 roomCounter++;
             }
@@ -127,12 +161,21 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        if (PlayerController.current != null) 
+        if (sceneIndex > 1) 
         {
-            PlayerController.current.characterController.enabled = false;
-            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
-            PlayerController.current.characterController.enabled = true;
+            if (PlayerController.current != null)
+            {
+                PlayerController.current.characterController.enabled = false;
+                PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+                PlayerController.current.characterController.enabled = true;
+            }
         }
+        else 
+        {
+            Destroy(PlayerController.current.gameObject);
+            Destroy(UIManager.ui.gameObject);
+            Destroy(CameraManager.current.gameObject);
+        }       
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
         {
             transition.SetTrigger("CrossfadeEnd");
@@ -178,7 +221,7 @@ public class GameManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            roomCounter = 0;
+            roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
             defeatText.SetActive(false);
         }
@@ -202,7 +245,7 @@ public class GameManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            roomCounter = 0;
+            roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
             victoryText.SetActive(false);
         }

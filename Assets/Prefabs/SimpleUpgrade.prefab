@@ -102,5 +102,6 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
       value: 0.45536894
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7730847760929042617, guid: 3d52d62a6b2e3f24e9fc9956a284bd06, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d52d62a6b2e3f24e9fc9956a284bd06, type: 3}

@@ -10,6 +10,7 @@ public class RangedEnemy : Enemy
     public float timeUntilAttack;
     public float timeRecoveryAttack;
     public float timeActiveAttack;
+    public GameObject raycastSpawner;
     float counter = 0f;
 
     public override void PrepareAttackBehaviour()
@@ -41,9 +42,20 @@ public class RangedEnemy : Enemy
 
     public virtual void SpawnProjectile(GameObject projectile, int damage, float speed) 
     {
-        newProjectile = Instantiate(projectile, this.transform.position, this.transform.rotation);
+        newProjectile = Instantiate(projectile, raycastSpawner.transform.position, this.transform.rotation);
         newProjectile.GetComponent<Projectile>().PrepareProjectile(damage, speed);
 
+    }
+
+    public override void Moving()
+    {
+        //base.Moving();
+        navMesh.SetDestination(target.transform.position);
+        if (attackRange.targetInRange() == true)
+        {
+            SpeedStop();
+            PrepareAttackBehaviour();
+        }
     }
 
     public override void Recovery()
@@ -57,10 +69,38 @@ public class RangedEnemy : Enemy
             SwitchState(state.Idle);
         }
     }
+    private void FixedUpdate()
+    {
+        Debug.Log(RaycastCheck());
+    }
     public override void Attack()
     {
         SpeedStop();
         transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
         base.Attack();
+    }
+
+    public bool RaycastCheck() 
+    {
+        Vector3 origin = raycastSpawner.transform.position;
+        Vector3 direction = PlayerController.current.gameObject.transform.position;
+        Ray ray = new Ray(origin, direction);
+        RaycastHit hitInfo;
+        bool result = Physics.Raycast(ray, out hitInfo, 40f);
+        if (result == true) 
+        {
+            if (hitInfo.transform.gameObject.tag == "Player") 
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        else 
+        {
+            return false;
+        }
     }
 }

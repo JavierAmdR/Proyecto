@@ -10,6 +10,10 @@ public class CharacterStats : MonoBehaviour
     public Stat speed;
     public Stat stamina;
     public Stat staminaReg;
+    public Stat crit;
+    public Stat poison;
+
+    public bool stunAttacks = false;
 
     public int currentHealth;
     public float currentStamina;

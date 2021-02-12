@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : Character
 {
@@ -14,11 +15,19 @@ public class Enemy : Character
     public Range attackRange;
     public CharacterStats enemyStats;
     public ParticleSystem hit;
+    public Rigidbody characterPhysics;
+
+    public Slider healthbar;
+
+    public bool inKnockback;
+    public float knockbackTime = 0.4f;
+    public float timeCounter = 0f;
 
     public string targetTag;
     public GameObject target;
 
     public bool die = false;
+    private int damage;
 
 
     private void Awake()
@@ -33,6 +42,28 @@ public class Enemy : Character
             eventSystem = GetComponent<EntityEvents>();
             eventSystem.onDamaged += GetDamage;
         }
+        if (characterPhysics == null) 
+        {
+            characterPhysics = GetComponent<Rigidbody>();
+        } 
+    }
+
+    public override void CharacterLoop()
+    {
+        base.CharacterLoop();
+        if (inKnockback == true) 
+        {
+            if (knockbackTime <= timeCounter) 
+            {
+                characterPhysics.velocity = Vector3.zero;
+                characterPhysics.angularVelocity = Vector3.zero;
+                timeCounter = 0f;
+            }
+            else 
+            {
+                timeCounter = Time.deltaTime;
+            }
+        }
     }
 
     public virtual void Initialization() 
@@ -43,6 +74,11 @@ public class Enemy : Character
         {
             targetTag = "Player";
             SetNewTarget(targetTag);
+        }
+        if (healthbar != null) 
+        {
+            healthbar.maxValue = enemyStats.health.GetValue();
+            healthbar.value = enemyStats.health.GetValue();
         }
 
         SetNormalSpeed();
@@ -83,11 +119,22 @@ public class Enemy : Character
 
     public virtual void GetDamage() 
     {
-        if (enemyStats.IsLethal(PlayerStats.current.attack.GetValue()) == true) 
+
+        damage = PlayerStats.current.CalculateDamage();
+        if (healthbar != null) 
+        {
+            healthbar.value -= damage;
+        }        
+        if (enemyStats.IsLethal(damage) == true) 
         {
             GameManager.current.AddCurency(currency);
         }
-        enemyStats.ReceiveDamage(PlayerStats.current.attack.GetValue());
+        enemyStats.ReceiveDamage(damage);
+        if (characterPhysics != null) 
+        {
+            Vector3 knockbackDirection = gameObject.transform.position - PlayerController.current.gameObject.transform.position;
+            characterPhysics.AddForce(knockbackDirection.normalized * 500f);
+        }
         if (hit != null)
         {
             hit.Play();
