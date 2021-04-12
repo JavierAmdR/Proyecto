@@ -80,6 +80,7 @@ public class Enemy : Character
             healthbar.maxValue = enemyStats.health.GetValue();
             healthbar.value = enemyStats.health.GetValue();
         }
+        GameManager.current.AddEnemy();
 
         SetNormalSpeed();
         SwitchState(state.Idle);
@@ -128,6 +129,7 @@ public class Enemy : Character
         if (enemyStats.IsLethal(damage) == true) 
         {
             GameManager.current.AddCurency(currency);
+            GameManager.current.RemoveEnemy();
         }
         enemyStats.ReceiveDamage(damage);
         if (characterPhysics != null) 

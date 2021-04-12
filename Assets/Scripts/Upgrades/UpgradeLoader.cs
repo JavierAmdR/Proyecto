@@ -10,6 +10,7 @@ public class UpgradeLoader : MonoBehaviour
     {
         storedUpgrade = newUpgrade;
         UpgradeList.current.AddUpgrade(newUpgrade);
+        GameManager.current.ActivateExit();
         switch (newUpgrade.triggerType) 
         {
             case Upgrade.trigger.OnObtained:

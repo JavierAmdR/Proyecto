@@ -109,10 +109,18 @@ public class PlayerStats : CharacterStats
         if (godMode == false) 
         {
             base.ReceiveDamage(damage);
+            HitParticles();
             UIManager.ui.HealthUpdate();
         }      
         
     }
+
+    public void HitParticles() 
+    {
+        PlayerController.current.hit.Clear();
+        PlayerController.current.hit.Play(true);
+    }
+
     public override void Die()
     {
         if (currentHealth <= 0)

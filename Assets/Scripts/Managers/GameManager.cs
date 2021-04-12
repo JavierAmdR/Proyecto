@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject godModeUI;
     public int roomCounter = 1;
 
+    public int enemiesInRoom = 0;
+
     public int currency = 0;
 
     void Awake()
@@ -75,6 +77,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         current = this;
+    }
+
+    public void AddEnemy() 
+    {
+        enemiesInRoom += 1;
+    }
+
+    public void RemoveEnemy() 
+    {
+        enemiesInRoom -= 1;
+        if (enemiesInRoom <= 0) 
+        {
+            ActivateExit();
+        }
+    }
+
+    public void ActivateExit() 
+    {
+        GameObject.Find("Exit").GetComponent<RoomEntrance>().EnableCollider();
     }
 
     public void AddCurency(int newCurrency) 

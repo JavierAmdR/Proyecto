@@ -25,18 +25,19 @@ public class Projectile : AttackCollider
         speed = newSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Environment") 
         {
             Destroy(this);
         }
-    }
-    private void OnTriggerEnter(Collision collision)
+    }*/
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag != "Enemy" || collision.gameObject.tag != "Player") 
+        if (collision.gameObject.tag == "Environment" || collision.gameObject.tag == "Player") 
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

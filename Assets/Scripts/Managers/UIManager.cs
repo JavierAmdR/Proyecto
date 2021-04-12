@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class UIManager : MonoBehaviour
 {
@@ -134,6 +136,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void EnableBlur() 
+    {
+        
+    }
+
+    public void DisableBlur() 
+    {
+        
+    }
 
     public void HealthUpdate() 
     {

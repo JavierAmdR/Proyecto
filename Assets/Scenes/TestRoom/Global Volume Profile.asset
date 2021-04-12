@@ -95,7 +95,7 @@ MonoBehaviour:
     max: 100
   tint:
     m_OverrideState: 1
-    m_Value: -17.3
+    m_Value: 9
     min: -100
     max: 100
 --- !u!114 &-1925515801899909319
@@ -207,6 +207,25 @@ MonoBehaviour:
     m_Value: 0
     min: -180
     max: 180
+--- !u!114 &-639982490192063351
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.1
+    min: 0
+    max: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +247,8 @@ MonoBehaviour:
   - {fileID: -1327896501931221832}
   - {fileID: -2254316044238095979}
   - {fileID: 6096328468418306417}
+  - {fileID: 7611072028476800083}
+  - {fileID: -639982490192063351}
 --- !u!114 &333177484989726248
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -264,10 +285,10 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.86748636, y: 0.8838418, z: 1, w: 0}
+    m_Value: {x: 0.86748636, y: 0.8838418, z: 1, w: 0.23608771}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.66329277, y: 0.8191389, z: 1, w: 0}
+    m_Value: {x: 0.66329277, y: 0.8191389, z: 1, w: -0.03372682}
 --- !u!114 &6096328468418306417
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -307,3 +328,40 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
     min: 0
+--- !u!114 &7611072028476800083
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
+  m_Name: LensDistortion
+  m_EditorClassIdentifier: 
+  active: 0
+  m_AdvancedMode: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+    min: -1
+    max: 1
+  xMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  yMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  scale:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0.01
+    max: 5

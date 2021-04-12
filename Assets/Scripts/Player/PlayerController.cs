@@ -50,6 +50,7 @@ public class PlayerController : Character
     public bool interactableInRange = false;
 
     public ParticleSystem slash;
+    public ParticleSystem hit;
 
     private Interactable interactableItem;
 
@@ -357,11 +358,12 @@ public class PlayerController : Character
                 PlayerStats.current.ReceiveDamage(other.GetComponent<Projectile>().GetDamageValue());
                 break;
             case ("TrapDamage"):
-                if (other.transform.parent.GetComponent<Trap>().isActive == true) 
-                {
-                    PlayerStats.current.ReceiveDamage(other.transform.parent.GetComponent<Trap>().damage);                    
+                /*if (other.transform.parent.GetComponent<Trap>().isActive == true) 
+                {*/
+                    PlayerStats.current.ReceiveDamage(other.transform.parent.GetComponent<Trap>().damage);
+                    Debug.Log("Damage from trap");
                     //other.transform.parent.GetComponent<Trap>().DisableDamage();
-                }
+                /*}*/
                 break;
         }
     }
