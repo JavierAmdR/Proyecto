@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -560,7 +560,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-7001304
+  m_Name: pb_Mesh-298264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3661,6 +3661,23 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7875092134728016510, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 22ec1516a7124e6499a73cb53672974e,
+        type: 2}
+    - target: {fileID: 7875092134728016510, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2931844571112018712, guid: 22ec1516a7124e6499a73cb53672974e,
+        type: 2}
+    - target: {fileID: 7875092134728016511, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.16
+      objectReference: {fileID: 0}
     - target: {fileID: 7875092136083501174, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3720,6 +3737,45 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpgradeSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875092136149569582, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a4986158350e6f4bad11dbcb906a7b7,
+        type: 2}
+    - target: {fileID: 7875092136149569582, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5911171927980816164, guid: 0a4986158350e6f4bad11dbcb906a7b7,
+        type: 2}
+    - target: {fileID: 7875092136149569582, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875092136149569583, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875092136191299616, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 22ec1516a7124e6499a73cb53672974e,
+        type: 2}
+    - target: {fileID: 7875092136191299616, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2931844571112018712, guid: 22ec1516a7124e6499a73cb53672974e,
+        type: 2}
+    - target: {fileID: 7875092136191299617, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b1ec4c5ea5ff7749879ae0ad109cd0d, type: 3}

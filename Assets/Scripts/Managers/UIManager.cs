@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public bool gamePaused = false;
 
     public TextMeshProUGUI currencyText;
+    public TextMeshProUGUI healthCounter;
 
     public GameObject abilityPanel;
     public GameObject levelUpPanel;
@@ -45,6 +46,7 @@ public class UIManager : MonoBehaviour
         healthSlider.value = PlayerStats.current.currentHealth;
         staminaSlider.maxValue = PlayerStats.current.stamina.GetValue();
         staminaSlider.value = PlayerStats.current.currentStamina;
+        HealthUpdate();
 
     }
 
@@ -148,7 +150,10 @@ public class UIManager : MonoBehaviour
 
     public void HealthUpdate() 
     {
+        healthSlider.maxValue = PlayerStats.current.health.GetValue();
         healthSlider.value = PlayerStats.current.currentHealth;
+        healthCounter.SetText(PlayerStats.current.currentHealth.ToString() + "/" + PlayerStats.current.health.GetValue());
+
     }
     public void StaminaUpdate()
     {

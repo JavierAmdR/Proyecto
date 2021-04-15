@@ -20,7 +20,6 @@ public class Weapon : MonoBehaviour
         //PlayerController.current.attackDrag += attackDrag[comboIndex];
         PlayerController.current.slash.Clear();
         PlayerController.current.slash.Play(true);
-        Debug.Log("Sword Attack!");
     }
 
     public void ActivateHitbox(int comboIndex) 

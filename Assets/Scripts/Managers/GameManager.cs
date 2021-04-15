@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum gameResult { Victory, Defeat};
+    public gameResult currentResult;
     public enum gameState {Intro ,MainMenu, Gameplay}
     public gameState currentState;
 
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
     public GameObject victoryText;
     public GameObject godModeUI;
     public int roomCounter = 1;
+
+    public float healthLost = 0f;
+    public float duration = 0f;
 
     public int enemiesInRoom = 0;
 
@@ -66,6 +71,15 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 2 && PlayerStats.current.currentHealth != PlayerStats.current.health.GetValue()) 
         {
             PlayerStats.current.currentHealth = PlayerStats.current.health.GetValue();
+        }
+        CalculateDuration();
+    }
+
+    public void CalculateDuration()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < 2)
+        {
+            duration += Time.deltaTime;
         }
     }
 
@@ -124,6 +138,11 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int newScene) 
     {
         StartCoroutine(LoadCrossfade(newScene));
+    }
+
+    public void LoadReset()
+    {
+        StartCoroutine(ResetGame());
     }
 
 
@@ -224,51 +243,73 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator LoadCrossfadeDefeat() 
+    IEnumerator ResetGame()
     {
         transition.SetTrigger("CrossfadeStart");
-        defeatText.SetActive(true);
+        SceneManager.LoadSceneAsync("TitleScreen");
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadSceneAsync(2);
-        while (SceneManager.GetActiveScene().buildIndex != 2)
+        while (SceneManager.GetActiveScene().name != "TitleScreen")
+        {
+            yield return null;
+        }
+        if (SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+            roomCounter = 1;
+            transition.SetTrigger("TitleScreen");
+            //GameObject.Find("Defeat").SetActive(true);
+            //defeatText.SetActive(false);
+        }
+    }
+
+    IEnumerator LoadCrossfadeDefeat() 
+    {
+        currentResult = gameResult.Defeat;
+        transition.SetTrigger("CrossfadeStart");
+        //defeatText.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadSceneAsync("EndScreen");
+        while (SceneManager.GetActiveScene().name != "EndScreen")
         {
             yield return null;
         }
         if (PlayerController.current != null)
         {
-            PlayerController.current.characterController.enabled = false;
-            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
-            PlayerController.current.characterController.enabled = true;
+            //PlayerController.current.characterController.enabled = false;
+            //PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+            //PlayerController.current.characterController.enabled = true;
         }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().name == "EndScreen")
         {
             roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
-            defeatText.SetActive(false);
+            //GameObject.Find("Defeat").SetActive(true);
+            //defeatText.SetActive(false);
         }
     }
 
     IEnumerator LoadCrossfadeVictory()
     {
+        currentResult = gameResult.Victory;
         transition.SetTrigger("CrossfadeStart");
-        victoryText.SetActive(true);
+        //victoryText.SetActive(true);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadSceneAsync(2);
-        while (SceneManager.GetActiveScene().buildIndex != 2)
+        SceneManager.LoadSceneAsync("EndScreen");
+        while (SceneManager.GetActiveScene().name != "EndScreen")
         {
             yield return null;
         }
         if (PlayerController.current != null)
         {
-            PlayerController.current.characterController.enabled = false;
-            PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
-            PlayerController.current.characterController.enabled = true;
+            //PlayerController.current.characterController.enabled = false;
+            //PlayerController.current.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+            //PlayerController.current.characterController.enabled = true;
         }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().name == "EndScreen")
         {
             roomCounter = 1;
             transition.SetTrigger("CrossfadeEnd");
-            victoryText.SetActive(false);
+            //GameObject.Find("Victory").SetActive(true);
+            //victoryText.SetActive(false);
         }
     }
 
