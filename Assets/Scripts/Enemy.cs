@@ -129,7 +129,7 @@ public class Enemy : Character
         if (enemyStats.IsLethal(damage) == true) 
         {
             GameManager.current.AddCurency(currency);
-
+            GameManager.current.AddEnemyDefeated();
             GameManager.current.RemoveEnemy();
         }
         enemyStats.ReceiveDamage(damage);

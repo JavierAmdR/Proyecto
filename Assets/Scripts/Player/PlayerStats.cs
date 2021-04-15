@@ -111,6 +111,8 @@ public class PlayerStats : CharacterStats
             base.ReceiveDamage(damage);
             HitParticles();
             UIManager.ui.HealthUpdate();
+            GameManager.current.AddHealthLost(damage);
+            GameManager.current.AddAttacksReceived();
         }      
         
     }

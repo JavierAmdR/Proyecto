@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     public float healthLost = 0f;
     public float duration = 0f;
+    public int attacksReceived = 0;
+    public int upgradesObtained = 0;
+    public int enemiesDefeated = 0;
 
     public int enemiesInRoom = 0;
 
@@ -81,6 +84,26 @@ public class GameManager : MonoBehaviour
         {
             duration += Time.deltaTime;
         }
+    }
+
+    public void AddEnemyDefeated()
+    {
+        enemiesDefeated += 1;
+    }
+
+    public void AddUpgradesObtained()
+    {
+        upgradesObtained += 1;
+    }
+
+    public void AddAttacksReceived()
+    {
+        attacksReceived += 1;
+    }
+
+    public void AddHealthLost(float damageReceived)
+    {
+        healthLost += damageReceived;
     }
 
     public void PlayIntro() 
