@@ -14,6 +14,8 @@ public class PlayerController : Character
     public enum movingState {inIdle, inMove, inDash, inAttackDrag}
     public movingState moveState;
 
+    public Animator playerAnimator;
+
 
     public Weapon mainWeapon;
     public int comboCounter = 0;
@@ -237,6 +239,7 @@ public class PlayerController : Character
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
         if (movementVector != Vector3.zero && dashing == false)
         {
+            playerAnimator.SetBool("IsMoving", true);
             Quaternion newLook = Quaternion.LookRotation(movementVector);            
             playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
         }        

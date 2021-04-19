@@ -10,12 +10,15 @@ public class Enemy : Character
     public EntityEvents eventSystem;
     public Hitbox hitbox;
 
+
     public int currency;
     public Range rangeDetection;
     public Range attackRange;
     public CharacterStats enemyStats;
     public ParticleSystem hit;
     public Rigidbody characterPhysics;
+
+    public Animator enemyController;
 
     public Slider healthbar;
 
@@ -45,7 +48,7 @@ public class Enemy : Character
         if (characterPhysics == null) 
         {
             characterPhysics = GetComponent<Rigidbody>();
-        } 
+        }
     }
 
     public override void CharacterLoop()

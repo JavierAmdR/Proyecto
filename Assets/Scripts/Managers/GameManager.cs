@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void CalculateDuration()
     {
-        if (SceneManager.GetActiveScene().buildIndex < 2)
+        if (SceneManager.GetActiveScene().buildIndex > 2)
         {
             duration += Time.deltaTime;
         }

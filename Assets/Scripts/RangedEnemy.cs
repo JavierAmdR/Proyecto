@@ -10,6 +10,7 @@ public class RangedEnemy : Enemy
     public float timeUntilAttack;
     public float timeRecoveryAttack;
     public float timeActiveAttack;
+    public Range safeRange;
     public GameObject raycastSpawner;
     float counter = 0f;
 
