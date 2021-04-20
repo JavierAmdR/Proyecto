@@ -80,7 +80,7 @@ public class PlayerController : Character
         }
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
         //basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
-        DontDestroyOnLoad(this);       
+        DontDestroyOnLoad(this);
     }
     void Start()
     {
@@ -239,15 +239,15 @@ public class PlayerController : Character
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
         if (movementVector != Vector3.zero && dashing == false)
         {
-            playerAnimator.SetBool("IsMoving", true);
+            
             Quaternion newLook = Quaternion.LookRotation(movementVector);            
             playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
-        }        
+        }
     }
 
     public void AttackDrag() 
     {
-        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);
+        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);        
     }
 
     public void CheckMovementState (Vector3 movement) 
@@ -255,6 +255,7 @@ public class PlayerController : Character
         if (CheckIdle(movement) == true) 
         {
             SwitchMovementState(movingState.inIdle);
+            playerAnimator.SetBool("IsMoving", false);
         }
         else 
         {
@@ -265,6 +266,7 @@ public class PlayerController : Character
             else 
             {
                 SwitchMovementState(movingState.inMove);
+                playerAnimator.SetBool("IsMoving", true);
             }
         }
     }
