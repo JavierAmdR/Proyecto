@@ -158,6 +158,7 @@ public class PlayerController : Character
             mainWeapon.Attack(comboCounter);
             mainWeapon.ActivateHitbox(comboCounter);
             SwitchMovementState(movingState.inAttackDrag);
+            playerAnimator.SetTrigger("AttackAnim");
         }
         SwitchAttackState(attackState.Recovery);
     }
@@ -240,7 +241,7 @@ public class PlayerController : Character
         if (movementVector != Vector3.zero && dashing == false)
         {
             
-            Quaternion newLook = Quaternion.LookRotation(movementVector);            
+            Quaternion newLook = Quaternion.LookRotation(movementVector);
             playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
         }
     }
