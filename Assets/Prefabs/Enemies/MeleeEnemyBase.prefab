@@ -252,7 +252,8 @@ AudioSource:
   m_GameObject: {fileID: 1501852356152166518}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63c61da36e3939f4d86c0860b24519bd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 09bd88b58ef917b44984526fba606931, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -486,7 +487,8 @@ AudioSource:
   m_GameObject: {fileID: 5182231366329733823}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63c61da36e3939f4d86c0860b24519bd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b9d6fee8f514432459764781150b8e5c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -613,12 +615,13 @@ AudioSource:
   m_GameObject: {fileID: 5698233725174057378}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63c61da36e3939f4d86c0860b24519bd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: cba6e7c483a4eb34f86c9b3ffbb6bba7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -911,6 +914,9 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   hit: {fileID: 2739586971136732118}
   characterPhysics: {fileID: 0}
+  walk: {fileID: 9185598738604372150}
+  attack: {fileID: 4811973733335666448}
+  death: {fileID: 2398438074672832893}
   enemyController: {fileID: 7630973566791452405}
   healthbar: {fileID: 8407204960108612698}
   inKnockback: 0

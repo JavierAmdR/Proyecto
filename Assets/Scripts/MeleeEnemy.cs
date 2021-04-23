@@ -29,6 +29,10 @@ public class MeleeEnemy : Enemy
             {
                 enemyAnimator.SetTrigger("CanAttack");
             }
+            if (attack != null)
+            {
+                attack.Play();
+            }
             counter = 0f;
             SwitchAttackState(attackState.Attack);
         } 

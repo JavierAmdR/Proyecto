@@ -19,6 +19,7 @@ public class EndscreenManager : MonoBehaviour
 
     void Start()
     {
+        UIManager.ui.HideUI();
         if (GameManager.current.currentResult == GameManager.gameResult.Defeat)
         {
             defeatAssets.SetActive(true);

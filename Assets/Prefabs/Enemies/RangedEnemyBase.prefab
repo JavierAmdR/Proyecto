@@ -1152,6 +1152,9 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   hit: {fileID: 2882743066327197861}
   characterPhysics: {fileID: 0}
+  walk: {fileID: 8365299830530692378}
+  attack: {fileID: 751881851893200092}
+  death: {fileID: 6543054348514483518}
   enemyController: {fileID: 0}
   healthbar: {fileID: 8545342499621978159}
   inKnockback: 0
@@ -1531,12 +1534,13 @@ AudioSource:
   m_GameObject: {fileID: 7968998942569412592}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63c61da36e3939f4d86c0860b24519bd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: cba6e7c483a4eb34f86c9b3ffbb6bba7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

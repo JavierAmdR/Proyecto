@@ -19,6 +19,10 @@ public class Enemy : Character
     public ParticleSystem hit;
     public Rigidbody characterPhysics;
 
+    public AudioSource walk;
+    public AudioSource attack;
+    public AudioSource death;
+
     public Animator enemyController;
 
     public Slider healthbar;
@@ -118,9 +122,17 @@ public class Enemy : Character
     public override void Moving()
     {
         base.Moving();
+        if (walk.isPlaying == false)
+        {
+            walk.Play();
+        }
         navMesh.SetDestination(target.transform.position);
         if (attackRange.targetInRange() == true) 
         {
+            if (walk.isPlaying == true)
+            {
+                walk.Stop();
+            }
             SpeedStop();
             PrepareAttackBehaviour();       
         }

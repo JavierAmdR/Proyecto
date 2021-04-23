@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public static UIManager ui;
 
     public GameObject pausePanel;
+    public GameObject playerUI;
 
     public bool gamePaused = false;
 
@@ -146,6 +147,11 @@ public class UIManager : MonoBehaviour
     public void DisableBlur() 
     {
         
+    }
+
+    public void HideUI()
+    {
+        playerUI.SetActive(false);
     }
 
     public void HealthUpdate() 

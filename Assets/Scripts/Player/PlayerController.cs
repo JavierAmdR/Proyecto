@@ -14,6 +14,11 @@ public class PlayerController : Character
     public enum movingState {inIdle, inMove, inDash, inAttackDrag}
     public movingState moveState;
 
+    public AudioSource walk;
+    public AudioSource dash;
+    public AudioSource damage;
+    public AudioSource upgrades;
+
     public Animator playerAnimator;
 
 
@@ -126,6 +131,7 @@ public class PlayerController : Character
         {
             OnDash();
             PlayerStats.current.StaminaDash();
+            dash.Play();
             invincible = true;
             SwitchMovementState(movingState.inDash);
         }
@@ -257,6 +263,10 @@ public class PlayerController : Character
         {
             SwitchMovementState(movingState.inIdle);
             playerAnimator.SetBool("IsMoving", false);
+            if (walk.isPlaying == true)
+            {
+                walk.Stop();
+            }
         }
         else 
         {
@@ -268,6 +278,10 @@ public class PlayerController : Character
             {
                 SwitchMovementState(movingState.inMove);
                 playerAnimator.SetBool("IsMoving", true);
+                if (walk.isPlaying == false)
+                {
+                    walk.Play();
+                }
             }
         }
     }
