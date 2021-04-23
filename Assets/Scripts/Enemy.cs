@@ -89,7 +89,6 @@ public class Enemy : Character
             healthbar.value = enemyStats.health.GetValue();
         }
         GameManager.current.AddEnemy();
-
         SetNormalSpeed();
         SwitchState(state.Idle);
     }
