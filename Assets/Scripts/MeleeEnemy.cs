@@ -25,6 +25,10 @@ public class MeleeEnemy : Enemy
         counter += 1 * Time.deltaTime;
         if (counter >= timeUntilAttack) 
         {
+            if (enemyAnimator != null)
+            {
+                enemyAnimator.SetTrigger("CanAttack");
+            }
             counter = 0f;
             SwitchAttackState(attackState.Attack);
         } 
@@ -40,7 +44,7 @@ public class MeleeEnemy : Enemy
     {
         base.InAttack();
         if (attackCollider.activeSelf == false) 
-        {
+        {                      
             ActivateAttackCollider(enemyStats.attack.GetValue());
         }
         else 

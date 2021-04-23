@@ -11,6 +11,7 @@ public class Enemy : Character
     public Hitbox hitbox;
 
 
+    public Animator enemyAnimator;
     public int currency;
     public Range rangeDetection;
     public Range attackRange;
@@ -101,6 +102,10 @@ public class Enemy : Character
         if (rangeDetection.targetInRange() == true && target == null) 
         {
             target = rangeDetection.ClosestTarget();
+            if (enemyAnimator != null) 
+            {
+                enemyAnimator.SetBool("PlayerDetected", true);
+            }
             Debug.Log(target);
             SwitchState(state.Moving);
         }
@@ -131,6 +136,10 @@ public class Enemy : Character
         }        
         if (enemyStats.IsLethal(damage) == true) 
         {
+            if (enemyAnimator != null)
+            {
+                enemyAnimator.SetTrigger("IsDead");
+            }
             GameManager.current.AddCurency(currency);
             GameManager.current.AddEnemyDefeated();
             GameManager.current.RemoveEnemy();

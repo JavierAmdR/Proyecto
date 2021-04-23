@@ -28,6 +28,7 @@ public class RangedEnemy : Enemy
         counter += 1 * Time.deltaTime;
         if (counter >= timeUntilAttack)
         {
+            enemyAnimator.SetTrigger("CanAttack");
             counter = 0f;
             SwitchAttackState(attackState.Attack);
         }
