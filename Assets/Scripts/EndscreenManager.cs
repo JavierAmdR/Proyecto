@@ -8,6 +8,9 @@ public class EndscreenManager : MonoBehaviour
     public GameObject victoryAssets;
     public GameObject defeatAssets;
 
+    public GameObject victoryText;
+    public GameObject defeatText;
+
     private int durationValue;
     private int durationValue2;
 
@@ -24,11 +27,15 @@ public class EndscreenManager : MonoBehaviour
         {
             defeatAssets.SetActive(true);
             victoryAssets.SetActive(false);
+            defeatText.SetActive(true);
+            victoryText.SetActive(false);
         }
         else
         {
             victoryAssets.SetActive(true);
             defeatAssets.SetActive(false);
+            defeatText.SetActive(false);
+            victoryText.SetActive(true);
         }
         SetTextValues();
     }
