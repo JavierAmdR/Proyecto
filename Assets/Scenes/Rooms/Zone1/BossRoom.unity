@@ -703,7 +703,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 343226e570a1fed40a8372ccd55e0360,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 15.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343226e570a1fed40a8372ccd55e0360,
         type: 3}
@@ -713,7 +713,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 343226e570a1fed40a8372ccd55e0360,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 12.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343226e570a1fed40a8372ccd55e0360,
         type: 3}
@@ -3734,7 +3734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112453025625296388}
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalRotation: {x: -0, y: 0.38268617, z: -0, w: -0.92387843}
   m_LocalPosition: {x: 0, y: -31.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3750,7 +3750,7 @@ Transform:
   - {fileID: 7084778969007703854}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 315, z: 0}
 --- !u!1001 &2112453026845459535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4895,12 +4895,17 @@ MonoBehaviour:
   navMesh: {fileID: 0}
   eventSystem: {fileID: 0}
   hitbox: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   currency: 2
   rangeDetection: {fileID: 8260475510525286141}
   attackRange: {fileID: 8260475511399977395}
   enemyStats: {fileID: 0}
   hit: {fileID: 6476813855367317383}
   characterPhysics: {fileID: 0}
+  walk: {fileID: 0}
+  attack: {fileID: 0}
+  death: {fileID: 0}
+  enemyController: {fileID: 0}
   healthbar: {fileID: 1957457109}
   inKnockback: 0
   knockbackTime: 0.2

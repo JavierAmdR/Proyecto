@@ -162,6 +162,7 @@ MonoBehaviour:
   timeToRetreat: 1.2
   timeBeforeCD: 3
   counter: 0
+  trapSound: {fileID: 4229539332586259844}
   trapDamage: {fileID: 8945258951068495460}
 --- !u!1 &8103893498486846236
 GameObject:
@@ -203,7 +204,8 @@ AudioSource:
   m_GameObject: {fileID: 8103893498486846236}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63c61da36e3939f4d86c0860b24519bd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0dde3738a73025b4891fe5b81f2e1a65, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
