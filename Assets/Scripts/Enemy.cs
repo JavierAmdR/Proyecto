@@ -122,16 +122,22 @@ public class Enemy : Character
     public override void Moving()
     {
         base.Moving();
-        if (walk.isPlaying == false)
+        if (walk != null)
         {
-            walk.Play();
+            if (walk.isPlaying == false)
+            {
+                walk.Play();
+            }
         }
         navMesh.SetDestination(target.transform.position);
         if (attackRange.targetInRange() == true) 
         {
-            if (walk.isPlaying == true)
+            if (walk != null)
             {
-                walk.Stop();
+                if (walk.isPlaying == true)
+                {
+                    walk.Stop();
+                }
             }
             SpeedStop();
             PrepareAttackBehaviour();       
