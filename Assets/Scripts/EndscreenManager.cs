@@ -37,7 +37,14 @@ public class EndscreenManager : MonoBehaviour
     {
         durationValue = (int)GameManager.current.duration / 60;
         durationValue2 = (int)GameManager.current.duration % 60;
-        durationText.SetText(durationValue.ToString() + ":" + durationValue2.ToString());
+        if (durationValue2 < 10)
+        {
+            durationText.SetText(durationValue.ToString() + ":0" + durationValue2.ToString());
+        }
+        else
+        {
+            durationText.SetText(durationValue.ToString() + ":" + durationValue2.ToString());
+        }
         enemiesDefeated.SetText(GameManager.current.enemiesDefeated.ToString());
         upgradesObtained.SetText(GameManager.current.upgradesObtained.ToString());
         healthLost.SetText(GameManager.current.healthLost.ToString());
