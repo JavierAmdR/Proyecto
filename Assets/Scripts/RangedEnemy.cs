@@ -57,7 +57,7 @@ public class RangedEnemy : Enemy
     {
         //base.Moving();
         navMesh.SetDestination(target.transform.position);
-        if (attackRange.targetInRange() == true)
+        if (attackRange.targetInRange() == true && RaycastCheck() == true)
         {
             SpeedStop();
             PrepareAttackBehaviour();
