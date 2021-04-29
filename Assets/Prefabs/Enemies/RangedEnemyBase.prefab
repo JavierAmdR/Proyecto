@@ -1163,6 +1163,9 @@ MonoBehaviour:
   targetTag: 
   target: {fileID: 0}
   die: 0
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 256
   Projectile: {fileID: 8067274991713590311, guid: f628dd3f46ea65d43bab7e70ee0e43b4,
     type: 3}
   projectileSpeed: 13.1

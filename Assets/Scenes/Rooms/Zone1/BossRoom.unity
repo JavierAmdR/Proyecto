@@ -1179,6 +1179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExitZone
       objectReference: {fileID: 0}
+    - target: {fileID: 1582052157251740054, guid: a3eb98c2e6db2cc41b5bf9a5232d8034,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1582052157251740055, guid: a3eb98c2e6db2cc41b5bf9a5232d8034,
         type: 3}
       propertyPath: m_Enabled

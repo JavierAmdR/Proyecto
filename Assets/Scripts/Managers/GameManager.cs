@@ -132,7 +132,14 @@ public class GameManager : MonoBehaviour
 
     public void ActivateExit() 
     {
-        GameObject.Find("Exit").GetComponent<RoomEntrance>().EnableCollider();
+        if (SceneManager.GetActiveScene().name == "BossRoom") 
+        {
+            GameObject.Find("ExitZone").GetComponent<ZoneExit>().EnableCollider();
+        }
+        else 
+        {
+            GameObject.Find("Exit").GetComponent<RoomEntrance>().EnableCollider();
+        }        
     }
 
     public void AddCurency(int newCurrency) 

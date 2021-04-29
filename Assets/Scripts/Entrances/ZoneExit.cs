@@ -11,4 +11,9 @@ public class ZoneExit : MonoBehaviour
             GameManager.current.LoadVictory();
         }
     }
+
+    public void EnableCollider() 
+    {
+        GetComponent<BoxCollider>().enabled = true;
+    }
 }
