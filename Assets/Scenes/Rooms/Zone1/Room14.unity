@@ -975,6 +975,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 2740600712799688207, guid: be452538d81a1e241ad2892238f5cb8d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 2755985436348109872, guid: be452538d81a1e241ad2892238f5cb8d,
         type: 3}
       propertyPath: m_TagString
@@ -1246,6 +1251,11 @@ PrefabInstance:
       value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 4746233483034985230, guid: be452538d81a1e241ad2892238f5cb8d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799620124519350617, guid: be452538d81a1e241ad2892238f5cb8d,
         type: 3}
       propertyPath: m_TagString
       value: Environment

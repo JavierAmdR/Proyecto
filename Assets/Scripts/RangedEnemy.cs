@@ -106,7 +106,7 @@ public class RangedEnemy : Enemy
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }

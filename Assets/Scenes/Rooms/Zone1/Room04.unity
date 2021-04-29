@@ -1204,6 +1204,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1935031129227512381, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 1970504928661809477, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1879,15 +1884,30 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 3602884512809391504, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 3602884513396069485, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602884513396069485, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602884513965798884, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3602884513965798884, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 3628220589435126881, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
@@ -2238,6 +2258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180102816215476104, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 4231849147013752801, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
@@ -3319,20 +3344,40 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6238392173911589574, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 6238392174403896123, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238392174403896123, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 6238392174908449458, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6238392174908449458, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 6244428594478948801, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244428594478948801, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 6270544470784851801, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
@@ -4533,6 +4578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534465787656293492, guid: acda3291802b4c347aad1640bba1a273,
+        type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 8588402165300701298, guid: acda3291802b4c347aad1640bba1a273,
         type: 3}
