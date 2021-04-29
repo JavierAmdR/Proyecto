@@ -35,7 +35,7 @@ public class MeleeEnemy : Enemy
             }
             counter = 0f;
             SwitchAttackState(attackState.Attack);
-        } 
+        }
     }
 
     public override void Attack()
