@@ -1106,6 +1106,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 679879486639691181, guid: 27b2e1853c4361443b71492e3f1b8bd2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.92
+      objectReference: {fileID: 0}
     - target: {fileID: 680183537361761506, guid: 27b2e1853c4361443b71492e3f1b8bd2,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3236,6 +3241,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5161074446855658686, guid: 27b2e1853c4361443b71492e3f1b8bd2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.87
+      objectReference: {fileID: 0}
     - target: {fileID: 5205516915377883923, guid: 27b2e1853c4361443b71492e3f1b8bd2,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4141,6 +4151,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7103494557459306695, guid: 27b2e1853c4361443b71492e3f1b8bd2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103494557459306695, guid: 27b2e1853c4361443b71492e3f1b8bd2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 7107191161260883427, guid: 27b2e1853c4361443b71492e3f1b8bd2,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4175,6 +4195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163333873786710903, guid: 27b2e1853c4361443b71492e3f1b8bd2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.91
       objectReference: {fileID: 0}
     - target: {fileID: 7166909862776563252, guid: 27b2e1853c4361443b71492e3f1b8bd2,
         type: 3}
