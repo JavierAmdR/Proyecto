@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 5084809213513697475, guid: 0e290afae292184419aa1275b7bb22fb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5084809213513697475, guid: 0e290afae292184419aa1275b7bb22fb,
         type: 3}
@@ -294,7 +294,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &68250360
 PrefabInstance:
@@ -826,7 +826,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh123272
+  m_Name: pb_Mesh147906
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2715,7 +2715,7 @@ PrefabInstance:
     - target: {fileID: 1449197098930108970, guid: f21b46e37610c5a4d86e8de3651528f1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1449197098930108970, guid: f21b46e37610c5a4d86e8de3651528f1,
         type: 3}
@@ -3672,7 +3672,7 @@ Transform:
   - {fileID: 1398722046}
   - {fileID: 1462108713}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &1462108709
 GameObject:
@@ -5079,7 +5079,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh123362
+  m_Name: pb_Mesh147996
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5568,8 +5568,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4652793180474118891, guid: 448488fd278584f4d914dc44e5ec591d,
         type: 3}
-      propertyPath: m_Lightmapping
-      value: 4
+      propertyPath: m_Shadows.m_Strength
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4652793180474118892, guid: 448488fd278584f4d914dc44e5ec591d,
         type: 3}
