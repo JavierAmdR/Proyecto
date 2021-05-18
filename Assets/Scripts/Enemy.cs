@@ -10,20 +10,12 @@ public class Enemy : Character
     public EntityEvents eventSystem;
     public Hitbox hitbox;
 
-
-    public Animator enemyAnimator;
     public int currency;
     public Range rangeDetection;
     public Range attackRange;
     public CharacterStats enemyStats;
     public ParticleSystem hit;
     public Rigidbody characterPhysics;
-
-    public AudioSource walk;
-    public AudioSource attack;
-    public AudioSource death;
-
-    public Animator enemyController;
 
     public Slider healthbar;
 
@@ -53,7 +45,7 @@ public class Enemy : Character
         if (characterPhysics == null) 
         {
             characterPhysics = GetComponent<Rigidbody>();
-        }
+        } 
     }
 
     public override void CharacterLoop()
@@ -89,6 +81,7 @@ public class Enemy : Character
             healthbar.value = enemyStats.health.GetValue();
         }
         GameManager.current.AddEnemy();
+
         SetNormalSpeed();
         SwitchState(state.Idle);
     }
@@ -105,10 +98,6 @@ public class Enemy : Character
         if (rangeDetection.targetInRange() == true && target == null) 
         {
             target = rangeDetection.ClosestTarget();
-            if (enemyAnimator != null) 
-            {
-                enemyAnimator.SetBool("PlayerDetected", true);
-            }
             Debug.Log(target);
             SwitchState(state.Moving);
         }
@@ -121,23 +110,9 @@ public class Enemy : Character
     public override void Moving()
     {
         base.Moving();
-        if (walk != null)
-        {
-            if (walk.isPlaying == false)
-            {
-                walk.Play();
-            }
-        }
         navMesh.SetDestination(target.transform.position);
         if (attackRange.targetInRange() == true) 
         {
-            if (walk != null)
-            {
-                if (walk.isPlaying == true)
-                {
-                    walk.Stop();
-                }
-            }
             SpeedStop();
             PrepareAttackBehaviour();       
         }
@@ -153,12 +128,7 @@ public class Enemy : Character
         }        
         if (enemyStats.IsLethal(damage) == true) 
         {
-            if (enemyAnimator != null)
-            {
-                enemyAnimator.SetTrigger("IsDead");
-            }
             GameManager.current.AddCurency(currency);
-            GameManager.current.AddEnemyDefeated();
             GameManager.current.RemoveEnemy();
         }
         enemyStats.ReceiveDamage(damage);

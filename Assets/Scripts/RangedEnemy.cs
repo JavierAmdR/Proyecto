@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class RangedEnemy : Enemy
 {
-
-    public LayerMask EnemyMask;
     public GameObject Projectile;
     private GameObject newProjectile;
     public float projectileSpeed;
     public float timeUntilAttack;
     public float timeRecoveryAttack;
     public float timeActiveAttack;
-    public Range safeRange;
     public GameObject raycastSpawner;
-    public bool checkRaycast = false;
     float counter = 0f;
 
     public override void PrepareAttackBehaviour()
@@ -31,11 +27,6 @@ public class RangedEnemy : Enemy
         counter += 1 * Time.deltaTime;
         if (counter >= timeUntilAttack)
         {
-            enemyAnimator.SetTrigger("CanAttack");
-            if (attack != null)
-            {
-                attack.Play();
-            }
             counter = 0f;
             SwitchAttackState(attackState.Attack);
         }
@@ -60,9 +51,8 @@ public class RangedEnemy : Enemy
     {
         //base.Moving();
         navMesh.SetDestination(target.transform.position);
-        if (attackRange.targetInRange() == true && checkRaycast == true)
+        if (attackRange.targetInRange() == true)
         {
-            checkRaycast = false;
             SpeedStop();
             PrepareAttackBehaviour();
         }
@@ -81,7 +71,6 @@ public class RangedEnemy : Enemy
     }
     private void FixedUpdate()
     {
-        checkRaycast = RaycastCheck();
         Debug.Log(RaycastCheck());
     }
     public override void Attack()
@@ -94,19 +83,17 @@ public class RangedEnemy : Enemy
     public bool RaycastCheck() 
     {
         Vector3 origin = raycastSpawner.transform.position;
-        Vector3 direction = (PlayerController.current.gameObject.transform.position - raycastSpawner.transform.position).normalized;
+        Vector3 direction = PlayerController.current.gameObject.transform.position;
         Ray ray = new Ray(origin, direction);
         RaycastHit hitInfo;
-        Debug.DrawRay(origin, direction, Color.red);
-        bool result = Physics.Raycast(ray, out hitInfo, 40f, ~EnemyMask);
-        if (result == true)
+        bool result = Physics.Raycast(ray, out hitInfo, 40f);
+        if (result == true) 
         {
-            Debug.Log(hitInfo.transform.gameObject);
             if (hitInfo.transform.gameObject.tag == "Player") 
             {
                 return true;
             }
-            else
+            else 
             {
                 return false;
             }

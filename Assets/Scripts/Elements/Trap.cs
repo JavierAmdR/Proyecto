@@ -12,7 +12,6 @@ public class Trap : MonoBehaviour
     public float timeToRetreat = 1.2f;
     public float timeBeforeCD = 3f;
     public float counter = 0f;
-    public AudioSource trapSound;
     bool activatingTrap = false;
     bool retreatingTrap = false;
     public Collider trapDamage;
@@ -44,7 +43,6 @@ public class Trap : MonoBehaviour
             activatingTrap = false;
             retreatingTrap = true;
             spikes.SetTrigger("TrapTrigger");
-            trapSound.Play();
         }
     }
 

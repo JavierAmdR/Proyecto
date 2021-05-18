@@ -14,13 +14,6 @@ public class PlayerController : Character
     public enum movingState {inIdle, inMove, inDash, inAttackDrag}
     public movingState moveState;
 
-    public AudioSource walk;
-    public AudioSource dash;
-    public AudioSource damage;
-    public AudioSource upgrades;
-
-    public Animator playerAnimator;
-
 
     public Weapon mainWeapon;
     public int comboCounter = 0;
@@ -85,7 +78,7 @@ public class PlayerController : Character
         }
         mainWeapon = GameObject.FindGameObjectWithTag("MainWeapon").GetComponent<Weapon>();
         //basicUpgrades = transform.GetChild(0).transform.GetChild(2).gameObject;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);       
     }
     void Start()
     {
@@ -131,7 +124,6 @@ public class PlayerController : Character
         {
             OnDash();
             PlayerStats.current.StaminaDash();
-            dash.Play();
             invincible = true;
             SwitchMovementState(movingState.inDash);
         }
@@ -164,7 +156,6 @@ public class PlayerController : Character
             mainWeapon.Attack(comboCounter);
             mainWeapon.ActivateHitbox(comboCounter);
             SwitchMovementState(movingState.inAttackDrag);
-            playerAnimator.SetTrigger("AttackAnim");
         }
         SwitchAttackState(attackState.Recovery);
     }
@@ -246,15 +237,14 @@ public class PlayerController : Character
         characterController.SimpleMove(movementVector * Time.deltaTime * PlayerStats.current.speed.GetValue());
         if (movementVector != Vector3.zero && dashing == false)
         {
-            
-            Quaternion newLook = Quaternion.LookRotation(movementVector);
+            Quaternion newLook = Quaternion.LookRotation(movementVector);            
             playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, newLook, Time.deltaTime * 15);
-        }
+        }        
     }
 
     public void AttackDrag() 
     {
-        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);        
+        characterController.SimpleMove(playerModel.transform.forward * attackDrag * Time.deltaTime);
     }
 
     public void CheckMovementState (Vector3 movement) 
@@ -262,11 +252,6 @@ public class PlayerController : Character
         if (CheckIdle(movement) == true) 
         {
             SwitchMovementState(movingState.inIdle);
-            playerAnimator.SetBool("IsMoving", false);
-            if (walk.isPlaying == true)
-            {
-                walk.Stop();
-            }
         }
         else 
         {
@@ -277,11 +262,6 @@ public class PlayerController : Character
             else 
             {
                 SwitchMovementState(movingState.inMove);
-                playerAnimator.SetBool("IsMoving", true);
-                if (walk.isPlaying == false)
-                {
-                    walk.Play();
-                }
             }
         }
     }

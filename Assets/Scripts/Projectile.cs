@@ -11,11 +11,6 @@ public class Projectile : AttackCollider
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
@@ -41,18 +36,6 @@ public class Projectile : AttackCollider
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Environment" || collision.gameObject.tag == "Player") 
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Environment")
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Environment")
         {
             Destroy(gameObject);
         }
