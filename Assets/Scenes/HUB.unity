@@ -3870,6 +3870,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1807896868}
+    - target: {fileID: 1659965689, guid: 254bb84cbf077f549be80b6c40928f90, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659965689, guid: 254bb84cbf077f549be80b6c40928f90, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659965689, guid: 254bb84cbf077f549be80b6c40928f90, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1952499814, guid: 254bb84cbf077f549be80b6c40928f90, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

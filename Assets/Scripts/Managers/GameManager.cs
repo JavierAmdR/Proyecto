@@ -175,6 +175,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ResetGame());
     }
 
+    public void LoadBoss()
+    {
+        SceneManager.LoadScene("BossRoom");
+    }
+
 
     public void LoadDefeat() 
     {

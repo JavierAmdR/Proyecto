@@ -15,6 +15,10 @@ public class Upgrade : ScriptableObject
     public string description;
     public stat relatedStat;
     public int value;
+    public stat secondStat;
+    public int secondValue;
+    public stat thirdStat;
+    public int thirdValue;
     public trigger triggerType;
     public bool isTriggerArea;
     public float areaSize;
