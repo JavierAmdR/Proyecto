@@ -93,7 +93,6 @@ public class PlayerController : Character
         playerModel = GetComponentInChildren<Transform>();
     }
 
-
     public override void CharacterLoop()
     {
         if (UIManager.ui.gamePaused == false)
