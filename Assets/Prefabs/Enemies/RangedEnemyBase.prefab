@@ -1155,7 +1155,7 @@ MonoBehaviour:
   walk: {fileID: 8365299830530692378}
   attack: {fileID: 751881851893200092}
   death: {fileID: 6543054348514483518}
-  enemyController: {fileID: 0}
+  enemyController: {fileID: 2821051737137648823}
   healthbar: {fileID: 8545342499621978159}
   inKnockback: 0
   knockbackTime: 0.4
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   timeActiveAttack: 0
   safeRange: {fileID: 0}
   raycastSpawner: {fileID: 8944770926334999992}
+  checkRaycast: 0
 --- !u!65 &3866893914195277052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1667,6 +1668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRanged_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3221089686207690545, guid: dabdadfa48381964793269d6bff7311e,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 9244d52923966b7488eda66ef8983af7, type: 3}
     - target: {fileID: 4506857149868139956, guid: dabdadfa48381964793269d6bff7311e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1726,7 +1732,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 24b45934e3c7ea54ea56d71ba0d3feee, type: 2}
+      objectReference: {fileID: 2100000, guid: 85b597ad09e7cb14a8df8685d1580564, type: 2}
+    - target: {fileID: 5416471260508086914, guid: dabdadfa48381964793269d6bff7311e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bbcd30effb9a3414ca5fde84f2f9feb9, type: 2}
+    - target: {fileID: 8718015804272535420, guid: dabdadfa48381964793269d6bff7311e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 72c0c1b9ad5cd784aa7d480e3d130050, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dabdadfa48381964793269d6bff7311e, type: 3}
 --- !u!95 &2821051737137648823 stripped
