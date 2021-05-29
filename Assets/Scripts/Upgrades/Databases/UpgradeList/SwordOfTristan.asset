@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e9dbf54b66edbb4ca258e579669d1b7, type: 3}
-  m_Name: SoulOfIsolde
+  m_Name: SwordOfTristan
   m_EditorClassIdentifier: 
-  id: I01
-  upgradeRarity: 2
-  upgradeName: Soul of Isolde
-  description: Adds +100 to health
-  relatedStat: 0
-  value: 100
-  secondStat: 3
-  secondValue: 0
+  id: 
+  upgradeRarity: 1
+  upgradeName: 
+  description: 
+  relatedStat: 1
+  value: 20
+  secondStat: 0
+  secondValue: -10
   thirdStat: 0
   thirdValue: 0
   triggerType: 6
