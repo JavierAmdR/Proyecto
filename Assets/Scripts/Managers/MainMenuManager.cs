@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGameButton() 
     {
-        GameManager.current.StartGame();
+        GameManager.current.LoadCinematic();
+        //SceneManager.LoadScene("Ananimatica");
+        //GameManager.current.StartGame();
     }
 }

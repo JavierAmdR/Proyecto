@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 22064c68b090ad743a4aa37cb353e5a8
+  - enabled: 1
+    path: Assets/Scenes/Animatica.unity
+    guid: 9d744d204a0d64545950ee93a28ff2ed
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e92eb4f954665e7439c0b724696f2bc4,
       type: 2}
