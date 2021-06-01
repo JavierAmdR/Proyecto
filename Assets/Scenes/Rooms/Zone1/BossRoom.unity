@@ -561,6 +561,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.037909865
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.2835598
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.9728285
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.88921875
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.8923055
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804393444037198665, guid: 97cbbff32933fe444add90aa0edc2216,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 1.0225674
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97cbbff32933fe444add90aa0edc2216, type: 3}
 --- !u!4 &917713079 stripped
@@ -571,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &917713080 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 5573549334144760660, guid: 97cbbff32933fe444add90aa0edc2216,
+  m_CorrespondingSourceObject: {fileID: 5866666020531560967, guid: 97cbbff32933fe444add90aa0edc2216,
     type: 3}
   m_PrefabInstance: {fileID: 917713078}
   m_PrefabAsset: {fileID: 0}
@@ -5506,9 +5536,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterState: 0
   attackStatus: 0
-  navMesh: {fileID: 0}
-  eventSystem: {fileID: 0}
-  hitbox: {fileID: 0}
+  navMesh: {fileID: 8260475511674181303}
+  eventSystem: {fileID: 6281885101317460980}
+  hitbox: {fileID: 5337391844332525120}
   enemyAnimator: {fileID: 917713080}
   currency: 2
   rangeDetection: {fileID: 8260475510525286141}
@@ -5519,7 +5549,7 @@ MonoBehaviour:
   walk: {fileID: 1312221042}
   attack: {fileID: 1917530952}
   death: {fileID: 1497628339}
-  enemyController: {fileID: 917713080}
+  enemyController: {fileID: 0}
   healthbar: {fileID: 1957457109}
   inKnockback: 0
   knockbackTime: 0.2
