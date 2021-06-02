@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public enum gameResult { Victory, Defeat};
     public gameResult currentResult;
-    public enum gameState {Intro ,MainMenu, Gameplay, Cinematica}
+    public enum gameState {Intro ,MainMenu, Gameplay}
     public gameState currentState;
 
     public GameObject exploringMusic;
@@ -158,12 +158,6 @@ public class GameManager : MonoBehaviour
         LoadScene(2);
         exploringMusic.SetActive(true);
         ChangeGameState(gameState.Gameplay);
-    }
-
-    public void LoadCinematic()
-    {
-        LoadScene(3);
-        ChangeGameState(gameState.Cinematica);
     }
 
     public void ExitGame() 
