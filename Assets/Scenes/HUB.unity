@@ -572,6 +572,16 @@ PrefabInstance:
       propertyPath: health.baseValue
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 581660915030020964, guid: e1561fff0785e3f498850c8987fb1958,
+        type: 3}
+      propertyPath: Attackanim
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 581660915030020964, guid: e1561fff0785e3f498850c8987fb1958,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 
+      objectReference: {fileID: 140402741}
     - target: {fileID: 581660915030021018, guid: e1561fff0785e3f498850c8987fb1958,
         type: 3}
       propertyPath: m_Name
@@ -787,6 +797,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 100933452}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &140402741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 581660916009151808, guid: e1561fff0785e3f498850c8987fb1958,
+    type: 3}
+  m_PrefabInstance: {fileID: 68250360}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef18960c4a58954fbf720eb69010ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &141827596
 PrefabInstance:
   m_ObjectHideFlags: 0

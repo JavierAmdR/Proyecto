@@ -21,6 +21,7 @@ public class PlayerController : Character
 
     public Animator playerAnimator;
 
+    public int Attackanim;
 
     public Weapon mainWeapon;
     public int comboCounter = 0;
@@ -164,7 +165,25 @@ public class PlayerController : Character
             mainWeapon.Attack(comboCounter);
             mainWeapon.ActivateHitbox(comboCounter);
             SwitchMovementState(movingState.inAttackDrag);
-            playerAnimator.SetTrigger("AttackAnim");
+            if (Attackanim == 1)
+            {
+                playerAnimator.SetTrigger("AttackAnim");
+            }
+            else if (Attackanim == 2)
+            {
+                playerAnimator.SetTrigger("Attack2");
+            }
+            else if (Attackanim == 3)
+            {
+                playerAnimator.SetTrigger("Attack3");
+            }
+            else if (Attackanim > 3)
+            {
+                playerAnimator.SetTrigger("AttackAnim");
+                Attackanim = 1;
+            }
+            print(Attackanim);
+            Attackanim += 1;
         }
         SwitchAttackState(attackState.Recovery);
     }
