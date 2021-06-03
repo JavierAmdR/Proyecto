@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 22064c68b090ad743a4aa37cb353e5a8
+  - enabled: 1
+    path: Assets/Scenes/Cinematic.unity
+    guid: de58b998e3a4cfb4ba36a8512cd9e1d1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e92eb4f954665e7439c0b724696f2bc4,
       type: 2}
