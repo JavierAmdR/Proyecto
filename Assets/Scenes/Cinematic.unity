@@ -709,8 +709,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 364064453}
-        m_MethodName: SkipButton
+      - m_Target: {fileID: 2118140370}
+        m_MethodName: SkipCinematic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
