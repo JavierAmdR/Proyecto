@@ -8,12 +8,19 @@ public class Cinematic_Manager : MonoBehaviour
     public VideoPlayer cinematic;
     private bool LoadedScene = false;
 
+    public void SkipCinematic()
+    {
+        GameManager.current.StartGame();
+        LoadedScene = true;
+        Debug.Log("Scene Loaded");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         cinematic.Play();
     }
-
+  
     // Update is called once per frame
     void Update()
     {
@@ -25,10 +32,9 @@ public class Cinematic_Manager : MonoBehaviour
         {
             if (LoadedScene == false)
             {
-                GameManager.current.StartGame();
-                LoadedScene = true;
-                Debug.Log("Scene Loaded");
+                SkipCinematic();
             }
         }
     }
+
 }
